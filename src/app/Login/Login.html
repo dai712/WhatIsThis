@@ -1,10 +1,18 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
+<link rel="stylesheet" href="/node_modules/bootstrap/dist/css/bootstrap.css">
 <body>
+<button (click)="login()">로그인해주세요</button>
+<button (click)="logout()">로그아웃</button>
+  <form *ngIf="isLogin" #f="ngForm" (ngSubmit)="onLogin(f)" novalidate>
+    <br>
+    아이디 : <br>
+    <input name="id" ngModel>
+    비밀번호 : <br>
+    <input name="password" ngModel> <br>
+    <button>로그인</button>
+  </form>
+<form *ngIf="isLogin">
+
+</form>
 
 </body>
-</html>
+

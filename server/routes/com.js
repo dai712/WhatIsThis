@@ -18,7 +18,8 @@ var Schema = mongoose.Schema;
 var client = new Schema({
   Login: [{
     id: String,
-    password: String
+    password: String,
+    nickname: String,
   }],
   Cfiles: [{
     ids: Array,
@@ -43,8 +44,8 @@ var group = new Schema({
 var Client = mongoose.model('Client', client);
 var Group = mongoose.model('Group', group);
 
-router.post('/수정', function(req, res) {
-
+router.post('/createNewId', function(req, res) {
+  console.log(req.body.content);
 });
 
 router.get('/수정', function (req, res) {

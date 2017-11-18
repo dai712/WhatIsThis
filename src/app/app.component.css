@@ -1,0 +1,51 @@
+#logo {
+  position : absolute;
+  cursor : pointer;
+
+  left : 5%;
+  top : 5%;
+
+  width : 20%;
+  height: 25%;
+}
+
+.logo {
+  position : absolute;
+
+  top : 25%;
+  left : 25%;
+
+  width : 50%;
+  height : 50%;
+}
+
+#menu{
+  position : absolute;
+
+  left : 26%;
+  top : 5%;
+
+  width : 80%;
+  height : 25%;
+}
+
+#login {
+  position : absolute;
+
+  left : 5%;
+  top : 31%;
+
+  width : 20%;
+  height : 80%;
+}
+
+#main {
+  position : absolute;
+
+  left : 26%;
+  top : 31%;
+
+  width : 80%;
+  height : 80%;
+
+}
