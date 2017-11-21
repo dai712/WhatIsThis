@@ -7,21 +7,22 @@ import {MenuComponent} from './Menu/Menu';
 import {FormsModule} from '@angular/forms';
 import {HttpClientModule} from '@angular/common/http';
 import {HttpService} from './HttpService';
-import {IdForm} from './IdForm';
 
 @NgModule({
   declarations: [
     AppComponent,
     MainComponent,
     LoginComponent,
-    MenuComponent
+    MenuComponent,
   ],
   imports: [
     BrowserModule,
     FormsModule,
     HttpClientModule
   ],
-  providers: [HttpService],
+  providers: [
+    HttpService,
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

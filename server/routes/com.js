@@ -1,6 +1,8 @@
 const express = require('express');
 const router = express.Router();
 const mongoose = require('mongoose');
+const app = express();
+
 mongoose.connect('mongodb://localhost/');
 
 const db = mongoose.connection;
@@ -14,6 +16,8 @@ router.get('/', function (req, res) {
   res.send('express works');
 });
 
+
+
 var Schema = mongoose.Schema;
 var client = new Schema({
   Login: [{
@@ -21,7 +25,7 @@ var client = new Schema({
     password: String,
     nickname: String,
   }],
-  Cfiles: [{
+  Cfiles: [{        //클라이언트 파일
     ids: Array,
     Access: Array
   }],
@@ -33,7 +37,7 @@ var client = new Schema({
 
 var group = new Schema({
   id: String,
-  Gfiles: [{
+  Gfiles: [{      //그룹파일
     ids: Array
   }],
   Members: [{
@@ -51,6 +55,12 @@ router.post('/createNewId', function(req, res) {
 router.get('/수정', function (req, res) {
 
 });
+
+router.post('/spreadText', function(req, res) {
+  console.log('updata');
+});
+
+
 
 
 module.exports = router;
