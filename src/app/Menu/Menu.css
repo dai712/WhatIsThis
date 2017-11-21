@@ -1,0 +1,15 @@
+body {
+  align-content: center;
+}
+div {
+  margin-top : 5%;
+  margin-left : 5%;
+  border: 1px solid black;
+  float: left;
+  width : 10%;
+  padding : 10px;
+  margin-right : 5%;
+  cursor : pointer;
+  text-align : center;
+  font-weight: bold;
+}
