@@ -1,10 +1,10 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { AppComponent } from './app.component';
-import {MainComponent} from './Main/Main';
 import {LoginComponent} from './Login/Login';
 import {MenuComponent} from './Menu/Menu';
 import {FormsModule} from '@angular/forms';
+import {RouterModule} from "@angular/router";
 
 import {HttpClientModule} from '@angular/common/http';
 import {HttpService} from './HttpService';
@@ -23,7 +23,6 @@ import {SearchComponent} from "./Main/Search/Search";
 @NgModule({
   declarations: [
     AppComponent,
-    MainComponent,
     LoginComponent,
     MenuComponent,
     CollaborationComponent,
@@ -40,7 +39,23 @@ import {SearchComponent} from "./Main/Search/Search";
   imports: [
     BrowserModule,
     FormsModule,
-    HttpClientModule
+    HttpClientModule,
+    RouterModule.forRoot([
+      {path: '', redirectTo: '/', pathMatch: 'full'},
+    ]),
+    RouterModule.forChild([
+      {path: 'private', component: PrivateComponent},
+      {path: 'group', component: GroupComponent},
+      {path: 'search', component: SearchComponent},
+      {path: 'privaterepository', component: PrivateRepositoryComponent},
+      {path: 'privateschedule', component: PrivateScheduleComponent},
+      {path: 'profile', component: ProfileComponent},
+      {path: 'grouprepository', component: GroupRepositoryComponent},
+      {path: 'search', component: SearchComponent},
+      {path: 'collaboration', component: CollaborationComponent},
+      {path: 'grouptodo', component: GroupToDoComponent},
+      {path: 'memberschedule', component: MemberScheduleComponent},
+    ])
   ],
   providers: [
     HttpService,

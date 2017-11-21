@@ -1,13 +1,16 @@
 <link rel="stylesheet" type="text/css" href="/font-awesome.min.css" />
 <body>
-<div>
+<div class="menudiv" routerLink="/private">
   개인 파일
 </div>
-<div>
+<div class="menudiv" routerLink="/group">
   그룹 작업
 </div>
-<div>
+<div class="menudiv" routerLink="/search">
   사용자 검색
+</div>
+<div class="main">
+  <router-outlet></router-outlet>
 </div>
 </body>
 
