@@ -1,4 +1,4 @@
-import {Component, OnInit, NgZone} from '@angular/core';
+import {Component, OnInit, NgZone, Input, EventEmitter, Output} from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
@@ -7,6 +7,8 @@ import { ActivatedRoute, Router } from '@angular/router';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit {
+  @Input() fromLoginId: string;
+  @Output() notifytoMenu = new EventEmitter<any>();
   constructor( private router: Router,
                private zone: NgZone) { }
   ngOnInit() {
@@ -18,5 +20,9 @@ export class AppComponent implements OnInit {
     this.zone.runOutsideAngular(() => {
       location.reload();
     });
+  }
+  onNotifyfromLogin(id: any) {
+    console.log(id);
+    this.fromLoginId = id;
   }
 }

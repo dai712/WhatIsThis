@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import {NgForm} from '@angular/forms';
 import {HttpService} from '../HttpService';
 import {IdForm} from '../IdForm';
@@ -15,6 +15,7 @@ export class LoginComponent implements OnInit {
   createID: IdForm;
   currentAccount: any;  // 접속중인 account
   newAccount: IdForm;
+  @Output() notifytoApp = new EventEmitter<any>();
   constructor(private httpService: HttpService) {}
   ngOnInit() {
     this.createID = new IdForm();
@@ -43,6 +44,7 @@ export class LoginComponent implements OnInit {
         this.currentAccount = result;
         console.log(this.currentAccount);
         alert('로그인성공');
+        this.notifytoApp.emit(this.currentAccount._id);
       }
     });
     // this.httpService.creNew(this.createID).subscribe();

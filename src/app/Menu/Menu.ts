@@ -1,19 +1,23 @@
-import { Component } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-menu',
   templateUrl: './Menu.html',
   styleUrls: ['./Menu.css']
 })
-export class MenuComponent {
-  click: number;
-  clickPrivate() {
-    this.click = 1;
+export class MenuComponent implements OnInit {
+  @Input() ID: string;
+  constructor( private router: Router) { }
+  ngOnInit() {
+    this.ID = '';
   }
-  clickGroup() {
-    this.click = 2;
-  }
-  clickSearch() {
-    this.click = 3;
+  routing(rout: string) {
+    if (this.ID === '') {
+      alert('not login');
+    } else {
+      const link = [rout + this.ID];
+      this.router.navigate(link);
+    }
   }
 }

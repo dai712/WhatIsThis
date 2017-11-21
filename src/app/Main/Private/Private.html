@@ -1,10 +1,10 @@
 <body>
 <nav>
-  <a routerLink="/privaterepository">개인 - 파일</a>
+  <a (click)="routing('/privaterepository/')">개인 - 파일</a>
   <router-outlet></router-outlet>
-  <a routerLink="/privateschedule">개인 - 시간표</a>
+  <a (click)="routing('/privateschedule/')">개인 - 시간표</a>
   <router-outlet></router-outlet>
-  <a routerLink="/profile">프로필</a>
+  <a (click)="routing('/profile/')">프로필</a>
   <router-outlet></router-outlet>
 </nav>
 </body>

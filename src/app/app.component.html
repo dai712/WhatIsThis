@@ -3,9 +3,9 @@
   <img src="../assets/images/img.jpg" class="logo" (click)="clickLogo()">
 </div>
 <div id="login">
-  <app-login></app-login>
+  <app-login (notifytoApp)="onNotifyfromLogin($event)"></app-login>
 </div>
 <div id="menu">
-  <app-menu></app-menu>
+  <app-menu [ID]="fromLoginId"></app-menu>
 </div>
 
