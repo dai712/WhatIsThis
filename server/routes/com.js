@@ -20,11 +20,11 @@ router.get('/', function (req, res) {
 
 var Schema = mongoose.Schema;
 var client = new Schema({
-  Login: [{
+  Login: {
     id: String,
     password: String,
     nickname: String,
-  }],
+  },
   Cfiles: [{        //클라이언트 파일
     ids: Array,
     Access: Array
@@ -51,7 +51,36 @@ var Group = mongoose.model('Group', group);
 router.post('/createNewId', function(req, res) {
   console.log(req.body.content);
 });
-
+router.post('/NewAccount', function (req, res) {
+  console.log(req.body.content);
+  var newAccount = new Client();
+  newAccount.Login.id = req.body.content.id;
+  newAccount.Login.password = req.body.content.password;
+  newAccount.Login.nickname = req.body.content.nickname;
+  console.log('created new account: '+newAccount.Login);
+  newAccount.save(function (err, savedAccount) {
+    if(err) return console.error(err);
+    res.send(savedAccount);
+  });
+});
+router.post('/checkUnique', function (req, res) {
+  console.log(req.body.content);
+  Client.findOne({'Login.id': req.body.content}, function (err, account) {
+    console.log(account);
+    if(err) return console.error("err " + err);
+    if(account==null) res.send(true);
+    else res.send(false);
+  })
+});
+router.post('/login', function (req, res) {
+  console.log(req.body.content);
+  Client.findOne({ $and: [{'Login.id': req.body.content.id}, {'Login.password': req.body.content.password}]}, function (err, account) {
+    console.log(account);
+    if(err) return console.error(err);
+    if(account==null) res.send(false);
+    else res.send(account);
+  })
+})
 router.get('/수정', function (req, res) {
 
 });
@@ -59,6 +88,8 @@ router.get('/수정', function (req, res) {
 router.post('/spreadText', function(req, res) {
   console.log('updata');
 });
+
+
 
 
 
