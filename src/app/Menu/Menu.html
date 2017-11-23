@@ -1,13 +1,15 @@
 <link rel="stylesheet" type="text/css" href="/font-awesome.min.css" />
 <body>
-<div class="menudiv" (click)="routing('/private/')">
-  개인 파일
-</div>
-<div class="menudiv" (click)="routing('/group/')">
-  그룹 작업
-</div>
-<div class="menudiv" (click)="routing('/search/')">
-  사용자 검색
+<div class = "menudiv inner">
+  <div class="menudiv" (click)="routing('/private/')">
+    개인 파일
+  </div>
+  <div class="menudiv" (click)="routing('/group/')">
+    그룹 작업
+  </div>
+  <div class="menudiv" (click)="routing('/search/')">
+    사용자 검색
+  </div>
 </div>
 <div class="main">
   <router-outlet></router-outlet>

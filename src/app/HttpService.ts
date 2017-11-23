@@ -6,12 +6,6 @@ import { HttpClient } from '@angular/common/http';
 @Injectable()
 export class HttpService {
   constructor(private http: HttpClient) {}
-  creNew(contents: any) {
-    return this.http.post('/com/createNewId', {content: contents});
-  }
-  getList() {
-    return this.http.get('./com/getAllMemos');
-  }
   checkUniqueId(id: string) {
     return this.http.post('/com/checkUnique', {content: id});
   }
@@ -20,5 +14,11 @@ export class HttpService {
   }
   login(contents: any) {
     return this.http.post('/com/login', {content: contents});
+  }
+  saveSchedule(contents: any) {
+    return this.http.post('/com/saveSchedule', {content: contents});
+  }
+  getAccount(contents: string) {
+    return this.http.post('/com/getAccount', {content: contents});
   }
 }

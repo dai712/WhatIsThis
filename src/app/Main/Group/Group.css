@@ -5,3 +5,7 @@ div {
   align-self : center;
   text-align : center;
 }
+
+a {
+  border: 1px solid black;
+}

@@ -30,6 +30,7 @@
 }
 
 #login {
+  align-content : center;
   position : absolute;
 
   left : 5%;
@@ -37,5 +38,6 @@
 
   width : 20%;
   height : 80%;
+  border: 1px solid black;
 }
 

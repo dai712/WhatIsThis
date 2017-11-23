@@ -32,6 +32,10 @@ var client = new Schema({
   Group: [{
     ids: Array,
     master: Array
+  }],
+  Schedule: [{
+    subjects: Array,
+    time: Array
   }]
 });
 
@@ -80,7 +84,26 @@ router.post('/login', function (req, res) {
     if(account==null) res.send(false);
     else res.send(account);
   })
-})
+});
+
+router.post('/saveSchedule', function (req, res) {
+  Client.findOne({'Login.id': req.body.content.id}, function (err, account) {
+    account.Schedule.subjects = req.body.content.subjects;
+    account.Schedule.time = req.body.content.time;
+    account.save(function(err, updatedAccount) {
+      if(err) console.log(err);
+    })
+  });
+});
+
+router.post('/getAccount', function(req, res){
+  console.log(req.body.content);
+  Client.findOne({'Login.id': req.body.content}, function(err, account){
+    if(err) console.log(err);
+    else res.send(account);
+  })
+});
+
 router.get('/수정', function (req, res) {
 
 });

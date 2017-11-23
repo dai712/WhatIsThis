@@ -1,3 +1,35 @@
+<link rel="stylesheet" href="/node_modules/bootstrap/dist/css/bootstrap.css">
 <body>
-a
+<div>
+  <ul>
+    <li *ngFor="let print of printtime">
+      {{print}}
+    </li>
+
+  </ul>
+</div>
+<div class="schedule">
+  <table>
+    <tr>
+      <td *ngFor="let day of days">{{day.day}}</td>
+    </tr>
+
+    <tr *ngFor="let time3 of time">
+      <td *ngFor="let time4 of time2" [ngClass]="{
+      'innertime' : testTime(time3, time4) === false,
+      'innerselect': testTime(time3, time4) === true
+      }" (click)="clicktime(time3, time4)"></td>
+    </tr>
+  </table>
+
+</div>
+<div class="subdiv">
+  <form class="subject" #f="ngForm" (ngSubmit)="submit(f)" novalidate>
+    <br>
+    과목명: <input name="subject" ngModel><br>
+    <button>적용</button>
+  </form>
+  <button (click)="clear()">클리어</button>
+  <button (click)="saveSchedule()">저장</button>
+</div>
 </body>

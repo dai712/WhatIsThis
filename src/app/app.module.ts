@@ -4,7 +4,7 @@ import { AppComponent } from './app.component';
 import {LoginComponent} from './Login/Login';
 import {MenuComponent} from './Menu/Menu';
 import {FormsModule} from '@angular/forms';
-import {RouterModule} from "@angular/router";
+import {RouterModule} from '@angular/router';
 
 import {HttpClientModule} from '@angular/common/http';
 import {HttpService} from './HttpService';
@@ -34,7 +34,7 @@ import {SearchComponent} from './Main/Search/Search';
     PrivateScheduleComponent,
     PrivateComponent,
     ProfileComponent,
-    SearchComponent
+    SearchComponent,
   ],
   imports: [
     BrowserModule,
