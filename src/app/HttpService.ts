@@ -21,4 +21,19 @@ export class HttpService {
   getAccount(contents: string) {
     return this.http.post('/com/getAccount', {content: contents});
   }
+  createGroup(contents: any) {
+    return this.http.post('/com/createGroup', {content: contents});
+  }
+  searchAllGroups() {
+    return this.http.get('/com/searchAllGroup');
+  }
+  joinGroup(contents: any) {
+    return this.http.post('/com/joinGroup', {content: contents});
+  }
+  withdrawGroup(contents: any) {
+    return this.http.post('/com/withdrawGroup', {content: contents});
+  }
+  removeGroup(contents: any) {
+    return this.http.post('/com/removeGroup', {content: contents});
+  }
 }

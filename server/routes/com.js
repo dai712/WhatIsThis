@@ -42,10 +42,8 @@ var client = new Schema({
 var group = new Schema({
   id: String,
   Gfiles: [{      //그룹파일
-    ids: Array
   }],
   Members: [{
-    ids: Array
   }]
 });
 
@@ -100,13 +98,43 @@ router.post('/getAccount', function(req, res){
   })
 });
 
-router.get('/수정', function (req, res) {
-
+router.post('/createGroup', function(req, res){
+  var newGroup = new Group();
+  newGroup.id = req.body.content[0];
+  newGroup.Members.push(req.body.content[1]);
+  newGroup.save(function(err, savedGroup){
+    if(err) console.log(err);
+    console.log(savedGroup);
+    console.log(savedGroup.Members);
+  })
 });
 
+router.get('/searchAllGroup', function(req, res){
+  console.log('모든그룹');
+  Group.find(function(err, documents){
+    if(err) console.error(err);
+    res.send(documents);
+  });
+});
 
+router.post('/joinGroup', function(req, res){
+  Group.findOneAndUpdate({_id: req.body.content[0]}, {$push: {Members : req.body.content[1]}}, function(err, updatedGroup){
+    if(err) console.error(err);
+    console.log(updatedGroup.Members);
+  });
+});
 
+router.post('/withdrawGroup', function(req, res){
+  Group.findOneAndUpdate({_id: req.body.content[0]}, {$pull: {Members : req.body.content[1]}}, function(err, updatedGroup){
+    if(err) console.error(err);
+    console.log(updatedGroup.Members);
+  });
+});
 
-
+router.post('/removeGroup', function(req, res){
+    Group.findOneAndRemove({_id: req.body.content[0]}, function(err, result){
+      if(err) return console.error(err);
+    });
+});
 
 module.exports = router;

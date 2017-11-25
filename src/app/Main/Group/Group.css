@@ -9,3 +9,31 @@ div {
 a {
   border: 1px solid black;
 }
+p {
+  padding-bottom:5px;
+}
+
+li {
+  list-style : none;
+  border: 1px solid black;
+  cursor : pointer;
+}
+
+.groupmenu {
+  position : absolute;
+
+}
+.group{
+  position : absolute;
+  top : 15%;
+  border: 1px solid black;
+}
+.select {
+  width : 20%;
+}
+
+.detail {
+  left : 30%;
+  width : 70%;
+  height : 70%;
+}

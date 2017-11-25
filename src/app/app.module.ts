@@ -20,6 +20,7 @@ import {ProfileComponent} from './Main/Private/Profile/Profile';
 import {PrivateComponent} from './Main/Private/Private';
 import {SearchComponent} from './Main/Search/Search';
 
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -54,7 +55,7 @@ import {SearchComponent} from './Main/Search/Search';
       {path: 'collaboration/:ID', component: CollaborationComponent},
       {path: 'grouptodo/:ID', component: GroupToDoComponent},
       {path: 'memberschedule/:ID', component: MemberScheduleComponent},
-    ])
+    ]),
   ],
   providers: [
     HttpService,

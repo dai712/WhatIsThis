@@ -1,13 +1,33 @@
 <body>
-<nav>
-  <a (click)="routing('/grouprepository/')">그룹 - 파일</a>
-  <a (click)="routing('/collaboration/')">그룹 - 공동작업</a>
-  <a (click)="routing('/grouptodo/')">그룹 - 할일</a>
-  <a (click)="routing('/memberschedule/')">그룹 - 스케쥴</a>
-  <div>
-  <router-outlet></router-outlet>
-  </div>
-</nav>
+<div class="groupmenu">
+  <nav>
+    <a (click)="routing('/grouprepository/')">그룹 - 파일</a>
+    <a (click)="routing('/collaboration/')">그룹 - 공동작업</a>
+    <a (click)="routing('/grouptodo/')">그룹 - 할일</a>
+    <a (click)="routing('/memberschedule/')">그룹 - 스케쥴</a>
+    <div>
+    <router-outlet></router-outlet>
+    </div>
+  </nav>
+</div>
 
-테스트
+<div class="group select">
+  <p>그룹 생성 : <a (click)="openGroup(0)">클릭</a></p><br>
+  <p>그룹 검색 : <a (click)="openGroup(1)">클릭</a></p><br>
+  <p>가입 그룹 : <a (click)="openGroup(2)">클릭</a></p><br>
+</div>
+<div class="group detail">
+    <form *ngIf="group[0]" #f="ngForm" (ngSubmit) = "create(f)">
+      그룹 이름 : <input name="id" ngModel><br>
+      <button>생성</button>
+    </form>
+    <form *ngIf="group[1]" #f="ngForm" (keyup) = "search(f)">
+      검색 : <input name="search" ngModel>
+      <li *ngFor="let groups of grouplist2" (click)="clickSearchedGroup(groups._id)">{{groups.id}}</li>
+    </form>
+    <form *ngIf="group[2]">
+      가입그룹
+      <li *ngFor="let groups of grouplist3">{{groups.id}} <button (click)="enterJoinedGroup(groups._id)">입장</button> <button (click)="removeJoinedGroup(groups._id)">탈퇴</button> </li>
+    </form>
+</div>
 </body>
