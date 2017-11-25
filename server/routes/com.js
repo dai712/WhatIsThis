@@ -87,18 +87,14 @@ router.post('/login', function (req, res) {
 });
 
 router.post('/saveSchedule', function (req, res) {
-  Client.findOne({'Login.id': req.body.content.id}, function (err, account) {
-    account.Schedule.subjects = req.body.content.subjects;
-    account.Schedule.time = req.body.content.time;
-    account.save(function(err, updatedAccount) {
-      if(err) console.log(err);
-    })
+  Client.findOneAndUpdate({_id: req.body.content.id}, {Schedule : req.body.content},function (err, account) {
+    console.log(account);
   });
 });
 
 router.post('/getAccount', function(req, res){
-  console.log(req.body.content);
-  Client.findOne({'Login.id': req.body.content}, function(err, account){
+  console.log("겟");
+  Client.findOne({_id: req.body.content}, function(err, account){
     if(err) console.log(err);
     else res.send(account);
   })
@@ -106,10 +102,6 @@ router.post('/getAccount', function(req, res){
 
 router.get('/수정', function (req, res) {
 
-});
-
-router.post('/spreadText', function(req, res) {
-  console.log('updata');
 });
 
 

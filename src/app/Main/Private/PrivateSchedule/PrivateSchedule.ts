@@ -58,13 +58,19 @@ export class PrivateScheduleComponent implements OnInit {
     this.Schedules.subjects = [];
     this.Schedules.id = this.id;
     this.seltime = [];
-    this.httpService.getAccount(this.id).subscribe(result => {
-      this.test = result;
-      console.log(this.test.Schedule.length);
-      if (this.test.Schdule.length === 0) {
-        console.log('없음');
+    this.httpService.getAccount(this.id).toPromise().then(result => {
+        this.test = result;
+        return this.test;
       }
-    });
+    ).then(result => {
+      if (result.Schedule.length === 0) {
+      } else {
+        this.Schedules.time = result.Schedule[0].time;
+        this.Schedules.subjects = result.Schedule[0].subjects;
+        console.log(this.Schedules);
+      }
+    }
+  );
   }
   clicktime(row: number, col: number) {
     this.input = [];
@@ -107,7 +113,6 @@ export class PrivateScheduleComponent implements OnInit {
     this.seltime = [];
   }
   submit(input: NgForm) {
-    console.log(this.Schedules);
     if (input.value.subject === '') {
       alert('과목명을 입력해주세요');
       return;
@@ -117,11 +122,10 @@ export class PrivateScheduleComponent implements OnInit {
     } else {
       this.Schedules.time.push(this.seltime);
       this.Schedules.subjects.push(input.value.subject);
-      console.log(this.Schedules);
     }
   }
   saveSchedule() {
+    console.log(this.Schedules);
     this.httpService.saveSchedule(this.Schedules).subscribe();
-    console.log('세이브');
   }
 }

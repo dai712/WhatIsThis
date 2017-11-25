@@ -44,7 +44,7 @@ export class LoginComponent implements OnInit {
         this.currentAccount = result;
         console.log(this.currentAccount);
         alert('로그인성공');
-        this.notifytoApp.emit(this.currentAccount.Login.id);
+        this.notifytoApp.emit(this.currentAccount._id);
       }
     });
     // this.httpService.creNew(this.createID).subscribe();
