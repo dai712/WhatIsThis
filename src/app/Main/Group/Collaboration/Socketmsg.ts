@@ -1,4 +1,5 @@
 export class Socketmsg {
-  id: string;
+  gid: string;
+  pid: string;
   content: string;
 }

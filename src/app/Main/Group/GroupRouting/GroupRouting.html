@@ -1,0 +1,15 @@
+
+<body>
+<div class="groupmenu">
+  <nav>
+    <a (click)="routing('/grouprepository/')">그룹 - 파일</a>
+    <a (click)="routing('/collaboration/')">그룹 - 공동작업</a>
+    <a (click)="routing('/grouptodo/')">그룹 - 할일</a>
+    <a (click)="routing('/memberschedule/')">그룹 - 스케쥴</a>
+    <div>
+      <router-outlet></router-outlet>
+    </div>
+  </nav>
+</div>
+</body>
+

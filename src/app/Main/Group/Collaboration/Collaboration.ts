@@ -10,7 +10,8 @@ import {Socketmsg} from './Socketmsg';
 })
 export class CollaborationComponent implements OnInit {
   @Input() msg;
-  id: string;
+  pid: string;
+  gid: string;
   printid: string;
   broad: Socketmsg;
   private sub: any;
@@ -19,16 +20,20 @@ export class CollaborationComponent implements OnInit {
   ngOnInit() {
     this.broad = new Socketmsg();
     this.sub = this.route.params.subscribe(params => {
-      this.id = params['ID'];
+      this.pid = params['ID'];
+      this.gid = params['GID'];
     });
     this.socket.on('chat-message', (data) => {
-      this.msg = data.content;
-      this.printid = data.id;
+      if ( data.gid === this.gid) {
+        this.msg = data.content;
+        this.printid = data.pid;
+      }
     });
   }
   sendModify() {
     this.broad.content = this.msg;
-    this.broad.id = this.id;
+    this.broad.pid = this.pid;
+    this.broad.gid = this.gid;
     this.socket.emit('add-message', this.broad);
   }
 

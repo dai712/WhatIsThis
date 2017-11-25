@@ -33,10 +33,7 @@ export class GroupComponent implements OnInit {
       this.group[i] = false;
     }
   }
-  routing(rout: string) {
-    const link = [rout + this.id];
-    this.router.navigate(link);
-  }
+
   openGroup(num: number) {
     for (let i = 0 ; i < this.group.length ; i++) {
       this.group[i] = false;
@@ -127,6 +124,8 @@ export class GroupComponent implements OnInit {
   }
 
   enterJoinedGroup(clicked: any) {
-    console.log(clicked);
+    console.log(this.id);
+    const link = ['/grouprouting/' + this.id +'/'+ clicked];
+    this.router.navigate(link);
   }
 }

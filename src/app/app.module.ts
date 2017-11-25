@@ -19,7 +19,7 @@ import {PrivateScheduleComponent} from './Main/Private/PrivateSchedule/PrivateSc
 import {ProfileComponent} from './Main/Private/Profile/Profile';
 import {PrivateComponent} from './Main/Private/Private';
 import {SearchComponent} from './Main/Search/Search';
-
+import {GroupRoutingComponent} from "./Main/Group/GroupRouting/GroupRouting";
 
 @NgModule({
   declarations: [
@@ -36,6 +36,7 @@ import {SearchComponent} from './Main/Search/Search';
     PrivateComponent,
     ProfileComponent,
     SearchComponent,
+    GroupRoutingComponent
   ],
   imports: [
     BrowserModule,
@@ -50,11 +51,12 @@ import {SearchComponent} from './Main/Search/Search';
       {path: 'privaterepository/:ID', component: PrivateRepositoryComponent},
       {path: 'privateschedule/:ID', component: PrivateScheduleComponent},
       {path: 'profile/:ID', component: ProfileComponent},
-      {path: 'grouprepository/:ID', component: GroupRepositoryComponent},
+      {path: 'grouprepository/:ID/:GID', component: GroupRepositoryComponent},
       {path: 'search/:ID', component: SearchComponent},
-      {path: 'collaboration/:ID', component: CollaborationComponent},
-      {path: 'grouptodo/:ID', component: GroupToDoComponent},
-      {path: 'memberschedule/:ID', component: MemberScheduleComponent},
+      {path: 'collaboration/:ID/:GID', component: CollaborationComponent},
+      {path: 'grouptodo/:ID/:GID', component: GroupToDoComponent},
+      {path: 'memberschedule/:ID/:GID', component: MemberScheduleComponent},
+      {path: 'grouprouting/:ID/:GID', component: GroupRoutingComponent},
     ]),
   ],
   providers: [
