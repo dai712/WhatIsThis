@@ -1,5 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+
 @Component({
   selector: 'app-private',
   templateUrl: './Private.html',

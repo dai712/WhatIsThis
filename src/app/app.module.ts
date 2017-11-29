@@ -21,6 +21,9 @@ import {PrivateComponent} from './Main/Private/Private';
 import {SearchComponent} from './Main/Search/Search';
 import {GroupRoutingComponent} from "./Main/Group/GroupRouting/GroupRouting";
 
+import {FileUploadModule} from '../../node_modules/ng2-file-upload/ng2-file-upload.js';
+
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -39,6 +42,7 @@ import {GroupRoutingComponent} from "./Main/Group/GroupRouting/GroupRouting";
     GroupRoutingComponent
   ],
   imports: [
+    FileUploadModule,
     BrowserModule,
     FormsModule,
     HttpClientModule,

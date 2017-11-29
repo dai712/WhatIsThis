@@ -1,3 +1,29 @@
+
+
+
+
+
+
+
+
+
 <body>
-a
+
+<div>
+  현재 위치 : <p *ngFor="let locs of loc">{{locs}} / </p>
+</div>
+  <div class="fileinput">
+    <input type="file" #f (change)="fileChangeEvent($event)" />
+    <button type="button" (click)="upload()">Upload</button>
+  </div>
+  <form  #f="ngForm" (ngSubmit)="makeDir(f)" novalidate>
+    <br>
+    디렉토리 생성 : <input name="dir" ngModel><br>
+    <button>생성</button>
+</form>
+<div *ngIf="loaded === 1">
+  <li *ngFor="let list of Privatelist"> {{list}} <button (click)="watchFile()">보기</button> <button (click)="deleteFile(list)">삭제</button></li>
+</div>
+  <p *ngIf="loaded === 0"> loading... </p>
+  <p *ngIf="loaded === 2"></p>
 </body>

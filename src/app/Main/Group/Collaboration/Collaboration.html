@@ -1,5 +1,5 @@
 <body>
 <h2>공동작업</h2> <h5> 수정중 : {{printid}}</h5>
-<textarea [(ngModel)] = "msg" (change)="sendModify()"></textarea>
+<textarea rows="4" [(ngModel)] = "msg" #myText (change)="sendModify(myText)"></textarea>
 
 </body>

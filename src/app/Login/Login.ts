@@ -2,6 +2,8 @@ import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import {NgForm} from '@angular/forms';
 import {HttpService} from '../HttpService';
 import {IdForm} from '../IdForm';
+import {HttpClient} from "@angular/common/http";
+
 
 @Component({
   selector: 'app-login',
@@ -16,7 +18,8 @@ export class LoginComponent implements OnInit {
   currentAccount: any;  // 접속중인 account
   newAccount: IdForm;
   @Output() notifytoApp = new EventEmitter<any>();
-  constructor(private httpService: HttpService) {}
+  constructor(public http: HttpClient,
+              private httpService: HttpService) {}
   ngOnInit() {
     this.createID = new IdForm();
     this.isIdChecked = false;
@@ -24,7 +27,6 @@ export class LoginComponent implements OnInit {
   }
   login() {
     this.init();
-    // alert('로그인 버튼 누름');
     this.isLogin = true;
   }
   logout() {
@@ -77,12 +79,23 @@ export class LoginComponent implements OnInit {
       alert('ID 중복확인을 해주세요');
       return;
     }
+    var returnID: any;
+    const formData: any = new FormData();
     this.newAccount = new IdForm();
     this.newAccount.id = f.value.id;
     this.newAccount.password = f.value.pw;
     this.newAccount.nickname = f.value.nickname;
     console.log(this.newAccount);
-    this.httpService.createAccount(this.newAccount).subscribe();
+    this.httpService.createAccount(this.newAccount).subscribe(
+      result => returnID = result
+    );
+    setTimeout(() => {
+      console.log(returnID);
+      returnID = returnID._id;
+      formData.append('id', returnID);
+      formData.append('loc', './uploads/Private/' + returnID);
+      this.http.post('/joinMakeDir/', formData).subscribe();
+    }, 1000);
     alert('회원가입이 완료되었습니다.');
     this.init();
   }

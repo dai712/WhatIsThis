@@ -2,6 +2,8 @@ import {Component, OnInit} from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import {HttpService} from "../../HttpService";
 import {NgForm} from "@angular/forms";
+import {HttpClient} from "@angular/common/http";
+
 
 @Component({
   selector: 'app-group',
@@ -16,7 +18,8 @@ export class GroupComponent implements OnInit {
   grouplist: any;
   grouplist2: any;
   grouplist3: any;
-  constructor(private route: ActivatedRoute,
+  constructor(public http: HttpClient,
+              private route: ActivatedRoute,
               private router: Router,
               private httpService: HttpService
               ) {}
@@ -46,12 +49,23 @@ export class GroupComponent implements OnInit {
     }
   }
   create(f: NgForm) {
+    const formData: any = new FormData();
+    var gid;
     this.groupForm.push(f.value.id);
     this.groupForm.push(this.id);
-    this.httpService.createGroup(this.groupForm).subscribe();
+    this.httpService.createGroup(this.groupForm).subscribe(
+      result => gid = result
+    );
+    setTimeout(() => {
+      gid = gid._id;
+      formData.append('id', gid);
+      formData.append('loc', './uploads/Group/' + gid);
+      this.http.post('/joinMakeDir/', formData).subscribe();
+    }, 1000);
     alert('생성 완료');
   }
   search(f: NgForm) {
+      this.groupForm = [];
       this.grouplist2 = [];
       for (let i = 0 ; i < this.grouplist.length ; i ++ ) {
         if (this.grouplist[i].id.match(f.value.search)) {
@@ -125,7 +139,7 @@ export class GroupComponent implements OnInit {
 
   enterJoinedGroup(clicked: any) {
     console.log(this.id);
-    const link = ['/grouprouting/' + this.id +'/'+ clicked];
+    const link = ['/grouprouting/' + this.id + '/' + clicked];
     this.router.navigate(link);
   }
 }

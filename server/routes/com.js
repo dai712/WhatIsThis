@@ -106,6 +106,7 @@ router.post('/createGroup', function(req, res){
     if(err) console.log(err);
     console.log(savedGroup);
     console.log(savedGroup.Members);
+    res.send(savedGroup);
   })
 });
 
@@ -136,5 +137,6 @@ router.post('/removeGroup', function(req, res){
       if(err) return console.error(err);
     });
 });
+
 
 module.exports = router;

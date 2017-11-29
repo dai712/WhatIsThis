@@ -36,4 +36,5 @@ export class HttpService {
   removeGroup(contents: any) {
     return this.http.post('/com/removeGroup', {content: contents});
   }
+
 }

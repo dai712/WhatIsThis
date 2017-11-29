@@ -10,6 +10,7 @@ import {Socketmsg} from './Socketmsg';
 })
 export class CollaborationComponent implements OnInit {
   @Input() msg;
+  caretPos: number = 0;
   pid: string;
   gid: string;
   printid: string;
@@ -30,7 +31,11 @@ export class CollaborationComponent implements OnInit {
       }
     });
   }
-  sendModify() {
+  sendModify(oField) {
+    if (oField.selectionStart || oField.selectionStart === '0') {
+      this.caretPos = oField.selectionStart;
+    }
+    console.log(this.caretPos);
     this.broad.content = this.msg;
     this.broad.pid = this.pid;
     this.broad.gid = this.gid;
