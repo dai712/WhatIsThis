@@ -1,24 +1,13 @@
 <link rel="stylesheet" href="/node_modules/bootstrap/dist/css/bootstrap.css">
 <body>
-<h2 *ngIf="currentAccount">{{currentAccount.Login.nickname}}님 환영합니다!</h2>
-<button (click)="login()">로그인</button>
-<button (click)="logout()">로그아웃</button>
-<button (click)="join()">회원가입</button>
-  <form *ngIf="isLogin" #f="ngForm" (ngSubmit)="onLogin(f)" novalidate>
-    <br>
-    아이디 : <input name="id" ngModel><br>
-    비밀번호 : <br>
-    <input type="password" name="password" ngModel> <br>
-    <button>로그인</button>
-  </form>
-  <form *ngIf="isJoin" #f="ngForm" novalidate>
-    <br>
-    아이디 : <input name="id" ngModel (change)="onChange()"><button (click)="checkUnique(f)">중복확인</button><br>
-    비밀번호 :<input type="password" name="pw" ngModel> <br>
-    닉네임 : <input name="nickname" ngModel><br>
-    <button (click)="completeJoin(f)">완료</button>
-  </form>
-
-
+<div *ngIf="isLogin === false">Loading...</div>
+<div *ngIf="isLogin">
+    <h2 *ngIf="currentAccount">{{currentAccount.id}}님 환영합니다!</h2>
+    <button ><a href="/auth/google">구글로 로그인</a></button>
+    <div *ngIf="currentAccount">
+      <button (click)="SignUp()">이아이디로 로그인</button>
+      <button><a href="/logout">다시선택</a></button>
+    </div>
+</div>
 </body>
 

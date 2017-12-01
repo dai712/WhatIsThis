@@ -12,8 +12,8 @@ export class HttpService {
   createAccount(contents: any) {
     return this.http.post('/com/NewAccount', {content: contents});
   }
-  login(contents: any) {
-    return this.http.post('/com/login', {content: contents});
+  login() {
+    return this.http.get('/com/login');
   }
   saveSchedule(contents: any) {
     return this.http.post('/com/saveSchedule', {content: contents});
@@ -36,5 +36,7 @@ export class HttpService {
   removeGroup(contents: any) {
     return this.http.post('/com/removeGroup', {content: contents});
   }
-
+  te(contents: any) {
+    return this.http.post('/com/fileupload', {content: contents});
+  }
 }

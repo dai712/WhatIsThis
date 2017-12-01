@@ -97,7 +97,7 @@ export class PrivateRepositoryComponent implements OnInit {
 
     formData.append('uploads[]', files[0], files[0]['name']);
     formData2.append('id', this.id);
-
+    this.https.te(formData).subscribe();
 
     this.http.post('/uploads/', formData)
       .subscribe(result => console.log('files', result));

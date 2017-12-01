@@ -7,11 +7,13 @@ import { ActivatedRoute, Router } from '@angular/router';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit {
+  isStart: number;
   @Input() fromLoginId: string;
   @Output() notifytoMenu = new EventEmitter<any>();
   constructor( private router: Router,
                private zone: NgZone) { }
   ngOnInit() {
+    this.isStart = 0;
   }
   clickLogo() {
     alert('click logo');
@@ -24,5 +26,11 @@ export class AppComponent implements OnInit {
   onNotifyfromLogin(id: any) {
     console.log(id);
     this.fromLoginId = id;
+    this.notifytoMenu.emit(id);
+    if (id) {
+      this.isStart = 1;
+    } else {
+      this.isStart = 0;
+    }
   }
 }

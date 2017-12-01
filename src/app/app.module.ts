@@ -20,6 +20,7 @@ import {ProfileComponent} from './Main/Private/Profile/Profile';
 import {PrivateComponent} from './Main/Private/Private';
 import {SearchComponent} from './Main/Search/Search';
 import {GroupRoutingComponent} from "./Main/Group/GroupRouting/GroupRouting";
+import {ModifyProfileComponent} from "./Main/Private/Profile/ModifyProfile";
 
 import {FileUploadModule} from '../../node_modules/ng2-file-upload/ng2-file-upload.js';
 
@@ -39,7 +40,8 @@ import {FileUploadModule} from '../../node_modules/ng2-file-upload/ng2-file-uplo
     PrivateComponent,
     ProfileComponent,
     SearchComponent,
-    GroupRoutingComponent
+    GroupRoutingComponent,
+    ModifyProfileComponent,
   ],
   imports: [
     FileUploadModule,
@@ -51,6 +53,7 @@ import {FileUploadModule} from '../../node_modules/ng2-file-upload/ng2-file-uplo
     ]),
     RouterModule.forChild([
       {path: 'private/:ID', component: PrivateComponent},
+      {path: 'modifyprofile/:ID', component: ModifyProfileComponent},
       {path: 'group/:ID', component: GroupComponent},
       {path: 'privaterepository/:ID', component: PrivateRepositoryComponent},
       {path: 'privateschedule/:ID', component: PrivateScheduleComponent},

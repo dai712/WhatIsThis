@@ -1,3 +1,12 @@
+.start{
+  position : absolute;
+  left: 30%;
+  top: 30%;
+  border: 1px solid blanchedalmond;
+  width : 50%;
+  height: 30%;
+}
+
 #logo {
   position : absolute;
   cursor : pointer;

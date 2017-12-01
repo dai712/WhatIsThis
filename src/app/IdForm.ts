@@ -1,5 +1,5 @@
 export class IdForm {
+  email: string;s
   id: string;
-  password: string;
   nickname: string;
 }
