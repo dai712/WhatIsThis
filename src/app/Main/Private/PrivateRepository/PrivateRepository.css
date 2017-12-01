@@ -2,8 +2,43 @@ li {
   text-align: center;
   list-style : none;
   border : 1px solid black;
+  cursor : pointer;
 }
 .fileinput {
   margin-bottom : 30px;
   border: 1px solid black;
+}
+
+.class {
+  position: absolute;
+  left : -10%;
+  top: -20%;
+}
+
+.detail {
+  border : none;
+  position: relative;
+  float : left;
+}
+.list {
+  position: absolute;
+  top : -7%;
+
+}
+a:link {
+  color : black;
+  text-decoration : none;
+}
+a:visited {
+  color : black;
+  text-decoration: none;
+}
+.public {
+  color : red;
+}
+.private {
+  color : black;
+}
+.group {
+  color : blue;
 }

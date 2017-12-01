@@ -47,11 +47,7 @@
   var fs = require('fs');
 
 
-
-  app.post('/test', function(req, res){
-    res.redirect('/signup/fa');
-  });
-
+  app.use('/download', express.static(__dirname));
 
   app.post('/makeDir', upload.fields([]),function(req, res){
     loc = req.body.loc;
@@ -68,9 +64,9 @@
   });
 
   app.post('/getPrivate/', upload.fields([]), function(req, res){
-    console.log(req.body.id);
-    var files = Finder.in(path.join('./uploads/Private/', req.body.id)).find();
-    loc = './uploads/Private/' + req.body.id;
+  console.log('로케' + req.body.loc);
+    var files = Finder.in(req.body.loc).find();
+    loc = req.body.loc;
     console.log(files);
     res.send(files);
   });

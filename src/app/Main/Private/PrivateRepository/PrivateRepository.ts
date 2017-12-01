@@ -20,10 +20,13 @@ export class PrivateRepositoryComponent implements OnInit {
   private sub: any;
   FormData3: FormData;
   temp: any;
-  Privatelist: any;
+  PrivateFilelist: any;
+  PrivateDirlist: any;
   loaded: number;
   currentLoc: string;
-  loc: Array<string>;
+  loc: string;
+  changingDir: Array<string>;
+  accessList: any;
   constructor(public http: HttpClient,
               public https: HttpService,
               private route: ActivatedRoute) {
@@ -33,57 +36,61 @@ export class PrivateRepositoryComponent implements OnInit {
     this.sub = this.route.params.subscribe(params => {
       this.id = params['ID'];
     });
-    this.loc = [];
+    this.loc = './uploads/Private/' + this.id;
+    this.currentLoc = this.id;
+    this.changingDir = [];
+    this.changingDir.push(this.id);
+    this.PrivateFilelist = [];
+    this.PrivateDirlist = [];
+    this.accessList = [];
     this.refresh();
   }
   init() {
     this.filesToUpload = [];
     this.text = '';
     this.temp = '';
-    this.Privatelist = [];
+  //  this.PrivateFilelist = [];
+  //  this.PrivateDirlist = [];
     this.loaded = 0;
-    this.loc = [];
-    const DataForm: any = new FormData();
-    DataForm.append('loc', './uploads/Private/' + this.id);
+  //  this.loc = [];
+  //  const DataForm: any = new FormData();
+  //  DataForm.append('loc', './uploads/Private/' + this.id);
   //  this.http.post('/refreshLoc/', DataForm).subscribe();
   }
   refresh() {
-
     this.FormData3 = new FormData();
-    this.FormData3.append('loc', this.loc.toString() + this.id);
-    console.log(this.loc.toString() + this.id);
-    this.FormData3.append('id', this.id);
+    this.FormData3.append('loc', this.loc);
+    this.accessList = [];
+    this.PrivateDirlist = [];
+    this.PrivateFilelist = [];
     this.http.post('/getPrivate/', this.FormData3).subscribe(
-      result => this.temp = result
+      result => {
+        this.temp = result;
+        if (isUndefined(this.temp) || this.temp.length === 0 ) {
+          this.loaded = 2;
+          return;
+        }
+        const test = this.loc.substring(1, this.loc.length).replace(/\//g, '\\') + '\\';
+        const Access: Array<any> = [];
+        for (let i = 0; i < this.temp.length ; i++) {
+          const temp2 = this.temp[i].split(test);
+          console.log(temp2);
+          if (temp2[1].indexOf('.') === -1) {
+            this.PrivateDirlist.push(temp2[1]);
+          } else {
+            this.PrivateFilelist.push(temp2[1]);
+            Access.push(this.loc + '/' + temp2[1]);
+          }
+          this.loaded = 1;
+        }
+        this.https.getPfileAccess(Access).subscribe(
+          result2 => {
+            this.accessList = result2;
+            console.log(this.accessList);
+          }
+        );
+      }
     );
-    setTimeout(() => {
-      console.log(this.temp);
-      if (isUndefined(this.temp) || this.temp.length === 0 ) {
-        this.loaded = 2;
-        return;
-      }
-      this.currentLoc = this.temp[0];
-      var temp2 = this.currentLoc.split('AjouTeam');
-      console.log(temp2[1]);
-      var temp3 = temp2[1].split('\\');
-      console.log(temp3);
-      this.loc = [];
-      for (let i = 3 ; i < temp3.length - 1 ; i ++) {
-        this.loc.push(temp3[i]);
-      }
-      var toArray = new Array();
-      this.Privatelist = [];
-      toArray = [];
-      for (let i = 0 ; i < this.temp.length ; i++) {
-        toArray.push(this.temp[i].split('\\'));
-        console.log(toArray[i][toArray[i].length - 1]);
-        this.Privatelist.push(toArray[i][toArray[i].length - 1]);
-        console.log(this.Privatelist);
-        this.loaded = 1;
-      }
-
-    }, 1000);
-    this.init();
   }
   upload() {
 
@@ -94,11 +101,15 @@ export class PrivateRepositoryComponent implements OnInit {
     const formData: any = new FormData();
     const formData2: any = new FormData();
     const files: Array<File> = this.filesToUpload;
-
+    const create: Array<string> = [];
     formData.append('uploads[]', files[0], files[0]['name']);
     formData2.append('id', this.id);
-    this.https.te(formData).subscribe();
 
+    create.push(this.loc + '/' + files[0]['name']);
+    create.push(this.id);
+    console.log(create[0]);
+
+    this.https.createPfile(create).subscribe();
     this.http.post('/uploads/', formData)
       .subscribe(result => console.log('files', result));
     alert('업로드 완료!');
@@ -109,24 +120,53 @@ export class PrivateRepositoryComponent implements OnInit {
 
   fileChangeEvent(fileInput: any) {
     this.filesToUpload = <Array<File>>fileInput.target.files;
-   // this.product.photo = fileInput.target.files[0]['name'];
   }
 
-  watchFile() {
+  watchFile(target: string) {
+    const formData: any = new FormData();
+    formData.append('loc', this.loc + '/' + target);
+   // this.http.post('/download', formData).subscribe();
+  }
+  enterDir(target: any) {
+    this.changingDir.push(target);
+    this.loc += '/' + target;
+    console.log(this.changingDir);
+    console.log(this.loc);
+    this.refresh();
   }
   deleteFile(target: string) {
     const formData: any = new FormData();
+    const del: Array<string> = [];
     formData.append('loc', './uploads/Private/' + this.id + '/' + target);
+    del.push(target);
+    del.push(this.id);
     alert('삭제하시겠습니까?');
+
     this.http.post('/delete', formData).subscribe();
+    this.https.deletePfile(del).subscribe();
     this.refresh();
   }
   makeDir(f: NgForm) {
-
     const formData: any = new FormData();
-    formData.append('loc', './uploads/Private/' + this.id + '/' + f.value.dir);
-    console.log('./uploads/Private/' + this.id + f.value.dir);
+    formData.append('loc', this.loc + '/' +  f.value.dir);
     this.http.post('/makeDir', formData).subscribe();
+    this.refresh();
+  }
+  changeAccess(target: string) {
+  }
+  changeDir(index: number) {
+    const targetPath: Array<string> = [];
+    console.log(index);
+    for (let i = 0 ; i < index + 1 ; i++) {
+      targetPath.push(this.changingDir[i]);
+    }
+    this.changingDir = targetPath;
+    let path = '';
+    for (let i = 0 ; i < targetPath.length ; i++) {
+      path += '/' + targetPath[i];
+    }
+    this.loc = './uploads/Private' + path;
+    console.log(this.loc);
     this.refresh();
   }
 }

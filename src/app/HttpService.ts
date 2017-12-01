@@ -39,4 +39,13 @@ export class HttpService {
   te(contents: any) {
     return this.http.post('/com/fileupload', {content: contents});
   }
+  createPfile(contents: any) {
+    return this.http.post('/com/createPfile', {content: contents});
+  }
+  deletePfile(contents: any) {
+    return this.http.post('/com/deletePfile', {content: contents});
+  }
+  getPfileAccess(contents: any) {
+    return this.http.post('/com/getAccess', {content: contents});
+  }
 }
