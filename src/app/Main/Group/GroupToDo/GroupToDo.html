@@ -1,3 +1,50 @@
+<!--<head>-->
+<!--<link rel="stylesheet" href="node_modules/ng-drag-drop/style.css">-->
+<!--</head>-->
 <body>
-그룹 할일
+<div>
+  <h1>해야할 것</h1>
+  <form class="addPanel" #f="ngForm" (ngSubmit)="addTask(f)">
+    title: <input name="title" ngModel><br>
+    content: <textarea name="content" ngModel></textarea> <br>
+    <button id="btnAdd">add</button>
+  </form>
+  <form *ngIf="todoList">
+    <ul *ngFor = "let todoTask of todoList" class="task" >
+      <li>
+        <h2 class="title">{{todoTask.title}}</h2>
+        <h3 class="content">{{todoTask.content}}</h3>
+      </li>
+      <button (click)="toDoing(todoTask)">시작</button>
+      <button (click)="toDone(todoTask)">완료</button>
+      <button (click)="deleteTask(todoTask)">X</button>
+    </ul>
+  </form>
+</div>
+<div id="doing">
+  <h1>진행중</h1>
+  <form *ngIf="doingList">
+    <ul *ngFor = "let doingTask of doingList" class="task">
+      <li>
+        <h2 class="title">{{doingTask.title}}</h2>
+        <h3 class="content">{{doingTask.content}}</h3>
+      </li>
+      <button (click)="toDolist(doingTask)">시작취소</button>
+      <button (click)="toDone(doingTask)">완료</button>
+      <button (click)="deleteTask(doingTask)">X</button>
+    </ul>
+  </form>
+</div>
+<div id="done">
+  <h1>완료</h1>
+  <form *ngIf="doneList">
+    <ul *ngFor = "let doneTask of doneList" class="task">
+      <li>
+        <h2 class="titleDone">{{doneTask.title}}</h2>
+        <h3 class="contentDone">{{doneTask.content}}</h3>
+      </li>
+      <button (click)="deleteTask(doneTask)">X</button>
+    </ul>
+  </form>
+</div>
 </body>

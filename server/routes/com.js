@@ -198,4 +198,60 @@ router.post('/changePfileAccess', function(req, res) {
     });
 });
 
+router.post('/allTask', function (req, res) {
+  // console.log(req.body.content);
+  Group.findOne({_id: req.body.content}, function (err, result) {
+    if(err) return console.error(err);
+    // console.log(result.Todo);
+    res.send(result.Todo);
+  })
+})
+
+router.post('/addTask', function (req, res) {
+  var task = new Object();
+  task.title = req.body.content.title;
+  task.content = req.body.content.content;
+  task.status = req.body.content.status;
+  // task.id = req.body.content.id;
+  console.log('will add');
+  console.log(task);
+  Group.findOneAndUpdate({_id: req.body.content.gid}, {$push: {Todo: task}}, function (err, group) {
+    if(err) return console.error(err);
+    res.send(group);
+    // console.log('before changing' + group.Todo.toString());
+  });
+})
+
+router.post('/changeTask', function (req, res) {   // gid, curTask, newstatus
+  var task = new Object();
+  task.title = req.body.content[1].title;
+  task.content = req.body.content[1].content;
+  task.status = req.body.content[2];
+  // task._id = req.body.content[1]._id;
+  Group.findOneAndUpdate({_id: req.body.content[0]}, {$pull: {Todo: req.body.content[1]}}, function (err, group) {
+    if(err) return console.log(err);
+  });
+  Group.findOneAndUpdate({_id: req.body.content[0]}, {$push: {Todo: task}}, function (err, group) {
+    if(err) return console.log(err);
+  });
+})
+
+router.post('/deleteTask', function (req, res) {
+  // var task = new Object();
+  // task.content = req.body.content[1].content;
+  // task.title = req.body.content[1].title;
+  // task.status = req.body.content[1].status;
+  // task._id = req.body.content[1]._id;
+  // console.log(task);
+  Group.findOneAndUpdate({_id: req.body.content[0]}, {$pull: { Todo: req.body.content[1]}}, function (err, group) {
+    if(err) return console.error(err);
+  });
+  // Group.findOneAndUpdate({_id: req.body.content.gid}, function (err, group) {
+  //   if(err) return console.error(err);
+  //   group.findOneAndRemove({_id:task.id}, function (err) {
+  //     if(err) return console.error(err);
+  //   })
+  // });
+})
+
 module.exports = router;

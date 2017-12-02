@@ -1,0 +1,49 @@
+h1 {
+  font-size: small;
+}
+div {
+  border: solid;
+  width: 300px;
+  height: 1000px;
+  float: left;
+  margin: 3px;
+}
+form {
+  float: left;
+}
+
+.addPanel {
+  border: dotted;
+}
+
+.todoList {
+  background-color: linen;
+  height: 50px;
+  width: auto;
+}
+
+.task {
+  border: medium;
+  width: 250px;
+  height: 100px;
+  background-color: whitesmoke;
+  margin: 3px;
+}
+
+.title{
+   font-size: small;
+ }
+.content{
+  font-size: smaller;
+  text-overflow: inherit;
+}
+.titleDone{
+  font-size: small;
+  text-decoration-line: line-through;
+}
+.contentDone{
+  font-size: smaller;
+  text-decoration-line: line-through;
+}
+#btnAdd {
+}

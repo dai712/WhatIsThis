@@ -48,7 +48,21 @@ export class HttpService {
   getPfileAccess(contents: any) {
     return this.http.post('/com/getAccess', {content: contents});
   }
+<<<<<<< HEAD
   changePfileAccess(contents: any){
     return this.http.post('/com/changePfileAccess', {content: contents});
+=======
+  addTask(Task: any) {
+    return this.http.post('/com/addTask', {content: Task});
+  }
+  getAllTask(gid: any) {
+    return this.http.post('com/allTask', {content: gid});
+  }
+  deleteTask(Task: any) {
+    return this.http.post('com/deleteTask', {content: Task});
+  }
+  changeTask(Task: any) {
+    return this.http.post('com/changeTask', {content: Task});
+>>>>>>> 7ca8d0323756342a27400e0e95fd686aa61a61eb
   }
 }
