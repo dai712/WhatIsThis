@@ -7,6 +7,11 @@ const GroupSchema = new mongoose.Schema({
   nickname: String,
   Files: Array,
   Members: Array,
+  Todo: [{
+    title: String,
+    content: String,
+    status: String
+  }]
 });
 
 module.exports = mongoose.model('Group', GroupSchema);
