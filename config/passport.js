@@ -21,13 +21,8 @@ passport.use('google', new GoogleStrategy({
     callbackURL: "http://localhost:3000/auth/google/callback"
   },
   function(accessToken, refreshToken, profile, done) {
-    // asynchronous verification, for effect...
     process.nextTick(function () {
       console.log(accessToken + profile);
-      // To keep the example simple, the user's Google profile is returned to
-      // represent the logged-in user.  In a typical application, you would want
-      // to associate the Google account with a user record in your database,
-      // and return that user instead.
       return done(null, profile);
     });
   }
@@ -45,15 +40,11 @@ var setup = function (app) {
   app.get('/auth/google',
     passport.authenticate('google', { scope: ['openid', 'email'] }),
     function(req, res){
-      // The request will be redirected to Google for authentication, so this
-      // function will not be called.
     });
 
   app.get('/auth/google/callback',
     passport.authenticate('google', { failureRedirect: '/' }),
     function(req, res) {
-      //console.log(req.user);
-      //console.log(req.query);
       res.redirect('/');
     });
 

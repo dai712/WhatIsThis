@@ -161,11 +161,11 @@ router.post('/getAccess', function(req, res){
     for (let i = 0 ; i < list.length; i++) {
       for (let j = 0 ;j < finded.Files.length ; j++){
         if(finded.Files[j].path === list[i]) {
-          if(finded.Files[j].access === '0') {
+          if(finded.Files[j].access === 0) {
             access.push('Public');
-          } else if(finded.Files[j].access === '1') {
+          } else if(finded.Files[j].access === 1) {
             access.push('Private');
-          } else if(finded.Files[j].access === '2') {
+          } else if(finded.Files[j].access === 2) {
             access.push('Group');
           }
         }
@@ -173,7 +173,29 @@ router.post('/getAccess', function(req, res){
     }
    res.send(access);
   });
+});
 
+router.post('/changePfileAccess', function(req, res) {
+    console.log(req.body.content);
+    let id = req.user.id;
+    let list = req.body.content;
+    let access = '';
+    if(list[1] === 'Public') {
+      access = 0;
+      console.log('퍼블릭');
+    } else if(list[1] === 'Private') {
+      access = 1;
+      console.log('프리베잇');
+    } else if(list[1] === 'Group') {
+      access = 2;
+      console.log('그룹' + access);
+    }
+  Client.findOneAndUpdate({'Login.id': id, Files: {$elemMatch: {path: list[0]}}}, {$set:{'Files.$.access': access}}, {new: true},
+    function(err, updated){
+    if(err) console.log(err);
+    console.log('업데이트된것 : ' + updated);
+    res.send(updated);
+    });
 });
 
 module.exports = router;

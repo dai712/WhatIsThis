@@ -5,8 +5,8 @@ const mongoose = require('mongoose');
 const GroupSchema = new mongoose.Schema({
   id: String,
   nickname: String,
-  Files: Array,
-  Members: Array,
+  Files: [String],
+  Members: [String],
 });
 
 module.exports = mongoose.model('Group', GroupSchema);

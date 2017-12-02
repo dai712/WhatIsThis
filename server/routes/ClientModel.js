@@ -11,13 +11,13 @@ const ClientSchema = new mongoose.Schema({
   },
   Files: [{
     path: String,
-    access: String,
+    access: Number,
   }],
   Group: [String],
   Schedule: [{
     subjects: String,
-    time: String,
+    time: [String],
   }],
 });
-
+ClientSchema.replace
 module.exports = mongoose.model('Client', ClientSchema);

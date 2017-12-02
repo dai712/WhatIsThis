@@ -59,7 +59,6 @@
   app.post('/delete', upload.fields([]),function(req, res){
     console.log(req.body);
     fs.unlink(req.body.loc);
-    if(err) console.error(err)
     res.send(res);
   });
 

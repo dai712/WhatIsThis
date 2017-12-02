@@ -48,4 +48,7 @@ export class HttpService {
   getPfileAccess(contents: any) {
     return this.http.post('/com/getAccess', {content: contents});
   }
+  changePfileAccess(contents: any){
+    return this.http.post('/com/changePfileAccess', {content: contents});
+  }
 }

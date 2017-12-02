@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, ElementRef, OnInit} from '@angular/core';
 import {HttpClient, HttpErrorResponse, HttpHeaders} from "@angular/common/http";
 import {HttpService} from "../../../HttpService";
 import {ActivatedRoute, Router} from "@angular/router";
@@ -27,6 +27,8 @@ export class PrivateRepositoryComponent implements OnInit {
   loc: string;
   changingDir: Array<string>;
   accessList: any;
+  clickAccess: boolean;
+  clickedAccess: Array<string>;
   constructor(public http: HttpClient,
               public https: HttpService,
               private route: ActivatedRoute) {
@@ -43,20 +45,11 @@ export class PrivateRepositoryComponent implements OnInit {
     this.PrivateFilelist = [];
     this.PrivateDirlist = [];
     this.accessList = [];
+    this.clickAccess = false;
+    this.clickedAccess = [];
     this.refresh();
   }
-  init() {
-    this.filesToUpload = [];
-    this.text = '';
-    this.temp = '';
-  //  this.PrivateFilelist = [];
-  //  this.PrivateDirlist = [];
-    this.loaded = 0;
-  //  this.loc = [];
-  //  const DataForm: any = new FormData();
-  //  DataForm.append('loc', './uploads/Private/' + this.id);
-  //  this.http.post('/refreshLoc/', DataForm).subscribe();
-  }
+
   refresh() {
     this.FormData3 = new FormData();
     this.FormData3.append('loc', this.loc);
@@ -122,11 +115,7 @@ export class PrivateRepositoryComponent implements OnInit {
     this.filesToUpload = <Array<File>>fileInput.target.files;
   }
 
-  watchFile(target: string) {
-    const formData: any = new FormData();
-    formData.append('loc', this.loc + '/' + target);
-   // this.http.post('/download', formData).subscribe();
-  }
+
   enterDir(target: any) {
     this.changingDir.push(target);
     this.loc += '/' + target;
@@ -137,7 +126,8 @@ export class PrivateRepositoryComponent implements OnInit {
   deleteFile(target: string) {
     const formData: any = new FormData();
     const del: Array<string> = [];
-    formData.append('loc', './uploads/Private/' + this.id + '/' + target);
+    console.log(this.loc);
+    formData.append('loc', this.loc + '/' + target);
     del.push(target);
     del.push(this.id);
     alert('삭제하시겠습니까?');
@@ -152,7 +142,20 @@ export class PrivateRepositoryComponent implements OnInit {
     this.http.post('/makeDir', formData).subscribe();
     this.refresh();
   }
-  changeAccess(target: string) {
+  setAccess(target: string, access: string) {
+      this.clickedAccess = [];
+      this.clickAccess = true;
+      this.clickedAccess.push(target);
+      this.clickedAccess.push(access);
+  }
+  changeAccess(target: string, access: string) {
+    console.log(this.loc + '/' + target);
+    const del: Array<string> = [];
+    del.push(this.loc + '/' + target);
+    del.push(access);
+    this.https.changePfileAccess(del).subscribe();
+    this.clickAccess = false;
+    this.refresh();
   }
   changeDir(index: number) {
     const targetPath: Array<string> = [];
@@ -169,4 +172,6 @@ export class PrivateRepositoryComponent implements OnInit {
     console.log(this.loc);
     this.refresh();
   }
+
+
 }

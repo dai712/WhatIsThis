@@ -9,7 +9,7 @@ import {HttpService} from "../HttpService";
 })
 export class MenuComponent implements OnInit {
   @Input() ID: string;
-  currentAccount: any;  // 접속중인 account
+  currentAccount: any;
   constructor( private router: Router,
                private http: HttpService) { }
   ngOnInit() {
