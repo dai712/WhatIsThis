@@ -1,33 +1,41 @@
 h1 {
-  font-size: small;
+  padding-left: 5px;
+  font-size: medium;
+
 }
-div {
-  border: solid;
+.lists {
+  border: 1px solid black;
   width: 300px;
   height: 1000px;
   float: left;
   margin: 3px;
+  overflow: auto;
 }
 form {
   float: left;
 }
 
 .addPanel {
-  border: dotted;
+  border: 1px solid lightseagreen;
+  background-color: lightblue;
+  margin-bottom: 5px;
+  margin-left: 5px;
+  width: 250px;
 }
-
-.todoList {
-  background-color: linen;
-  height: 50px;
-  width: auto;
+textarea{
+  margin-left: 5px;
 }
-
+li {
+  float: none;
+  list-style: none;
+}
 .task {
   border: medium;
-  width: 250px;
-  height: 100px;
+  width: 230px;
+  height: auto;
   background-color: whitesmoke;
   margin: 3px;
+  padding-bottom: 5px;
 }
 
 .title{
@@ -35,15 +43,9 @@ form {
  }
 .content{
   font-size: smaller;
-  text-overflow: inherit;
-}
-.titleDone{
-  font-size: small;
-  text-decoration-line: line-through;
-}
-.contentDone{
-  font-size: smaller;
-  text-decoration-line: line-through;
-}
-#btnAdd {
+  word-break:break-all;
+  padding-right: 5px;
+  /*text-overflow: clip;*/
+  /*overflow: auto;*/
+  /*white-space: initial;*/
 }

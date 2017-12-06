@@ -2,46 +2,50 @@
 <!--<link rel="stylesheet" href="node_modules/ng-drag-drop/style.css">-->
 <!--</head>-->
 <body>
-<div>
+<div class="lists">
   <h1>해야할 것</h1>
   <form class="addPanel" #f="ngForm" (ngSubmit)="addTask(f)">
-    title: <input name="title" ngModel><br>
-    content: <textarea name="content" ngModel></textarea> <br>
-    <button id="btnAdd">add</button>
+    제목: <input maxlength="10" name="title" ngModel><br><br>
+    <textarea rows="5" cols="32" maxlength="200" name="content" ngModel></textarea> <br>
+    <button id="btnAdd">추가</button>
   </form>
   <form *ngIf="todoList">
     <ul *ngFor = "let todoTask of todoList" class="task" >
       <li>
         <h2 class="title">{{todoTask.title}}</h2>
-        <h3 class="content">{{todoTask.content}}</h3>
+        <div class="content">{{todoTask.content}}</div>
       </li>
+      <li>
       <button (click)="toDoing(todoTask)">시작</button>
       <button (click)="toDone(todoTask)">완료</button>
       <button (click)="deleteTask(todoTask)">X</button>
+      </li>
     </ul>
   </form>
 </div>
-<div id="doing">
+<div id="doing" class="lists">
   <h1>진행중</h1>
   <form *ngIf="doingList">
     <ul *ngFor = "let doingTask of doingList" class="task">
       <li>
         <h2 class="title">{{doingTask.title}}</h2>
-        <h3 class="content">{{doingTask.content}}</h3>
+        <p class="content">{{doingTask.content}}</p>
       </li>
+      <li>
       <button (click)="toDolist(doingTask)">시작취소</button>
       <button (click)="toDone(doingTask)">완료</button>
       <button (click)="deleteTask(doingTask)">X</button>
+      </li>
     </ul>
   </form>
 </div>
-<div id="done">
+<div id="done" class="lists">
   <h1>완료</h1>
   <form *ngIf="doneList">
     <ul *ngFor = "let doneTask of doneList" class="task">
       <li>
-        <h2 class="titleDone">{{doneTask.title}}</h2>
-        <h3 class="contentDone">{{doneTask.content}}</h3>
+        <h2 class="title">{{doneTask.title}}</h2>
+        <p class="content">{{doneTask.content}}</p>
       </li>
       <button (click)="deleteTask(doneTask)">X</button>
     </ul>
