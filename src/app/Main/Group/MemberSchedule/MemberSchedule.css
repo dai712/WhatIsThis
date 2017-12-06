@@ -1,0 +1,47 @@
+div {
+  float : left;
+  marin:50px;
+}
+.schedule {
+  position : absolute;
+  width : 80%;
+}
+.subdiv {
+  position : absolute;
+  left : 82%;
+}
+table {
+  margin: auto;
+  border-spacing : 0;
+  width : 80%;
+}
+td {
+}
+ul {
+  position :absolute;
+  align-content: inherit;
+  left : -4%;
+  top: 2.5%;
+}
+li {
+  margin-bottom : 5.5px;
+  list-style : none;
+}
+td {
+  border: 1px solid black;
+  padding : 0;
+}
+tr {
+  width : 30px;
+}
+.innertime {
+  cursor : pointer;
+  height : 25px;
+  background-color: white;
+}
+
+.innerselect {
+  cursor : pointer;
+  height : 25px;
+  background-color : pink;
+}

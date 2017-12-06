@@ -21,6 +21,9 @@ export class HttpService {
   getAccount(contents: string) {
     return this.http.post('/com/getAccount', {content: contents});
   }
+  getGroup(contents: string){
+    return this.http.post('/com/getGroup',{content: contents});
+  }
   createGroup(contents: any) {
     return this.http.post('/com/createGroup', {content: contents});
   }

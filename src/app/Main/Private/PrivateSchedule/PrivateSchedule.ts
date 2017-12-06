@@ -20,13 +20,14 @@ export class PrivateScheduleComponent implements OnInit {
   seltime: Array<any>;
   Schedules: Table;
   input: Array<any>;
-
+  displaySubjectIndex: any;
   test: any;
 
   id: string;
   constructor(private route: ActivatedRoute,
               private httpService: HttpService) {}
   ngOnInit() {
+    this.displaySubjectIndex=0;
     this.route.params.subscribe(params => {
       this.id = params['ID'];
     });
@@ -109,6 +110,22 @@ export class PrivateScheduleComponent implements OnInit {
     }
     return false;
   }
+  testSubject(row: number, col: number) {
+
+    for (let i = 0 ; i < this.Schedules.time.length ; i++) {
+      for (let j = 0 ; j < this.Schedules.time[i].length ; j++) {
+        if (row === this.Schedules.time[i][j][0]  && col === this.Schedules.time[i][j][1]) {
+
+          this.displaySubjectIndex=i;
+          return true;
+        }
+      }
+    }
+
+    return false;
+  }
+
+
   clear() {
     this.seltime = [];
   }
@@ -125,6 +142,7 @@ export class PrivateScheduleComponent implements OnInit {
     }
   }
   saveSchedule() {
+    console.log("Schedule");
     console.log(this.Schedules);
     this.httpService.saveSchedule(this.Schedules).subscribe();
   }

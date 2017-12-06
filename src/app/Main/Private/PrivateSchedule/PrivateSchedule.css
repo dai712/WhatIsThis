@@ -44,3 +44,9 @@ tr {
   height : 25px;
   background-color : pink;
 }
+
+.subjecttext{
+  height:0px;
+  text-align: center;
+  padding:0px;
+}

@@ -18,7 +18,9 @@
       <td *ngFor="let time4 of time2" [ngClass]="{
       'innertime' : testTime(time3, time4) === false,
       'innerselect': testTime(time3, time4) === true
-      }" (click)="clicktime(time3, time4)"></td>
+      }" (click)="clicktime(time3, time4)">
+        <p class="subjecttext" *ngIf=testSubject(time3,time4)>{{Schedules.subjects[displaySubjectIndex]}}</p>
+      </td>
     </tr>
   </table>
 

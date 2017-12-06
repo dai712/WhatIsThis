@@ -1,3 +1,30 @@
+<link rel="stylesheet" href="/node_modules/bootstrap/dist/css/bootstrap.css">
 <body>
-그룹 스케쥴
+<div>
+  <ul>
+    <li *ngFor="let print of printtime">
+      {{print}}
+    </li>
+
+  </ul>
+</div>
+<div class="schedule">
+
+  <table>
+    <tr>
+      <td *ngFor="let day of days">{{day.day}}</td>
+    </tr>
+
+    <tr *ngFor="let time3 of time">
+      <td *ngFor="let time4 of time2" [ngClass]="{
+      'innertime' : testTime(time3, time4) === false,
+      'innerselect': testTime(time3, time4) === true
+      }" >
+
+      </td>
+    </tr>
+  </table>
+
+</div>
+
 </body>
