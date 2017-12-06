@@ -28,9 +28,9 @@ passport.use('google', new GoogleStrategy({
   }
 ));
 
-var setup = function (app) {
+var setupGoogle = function (app) {
   app.use(session({
-    secret: 'keyboard cat',
+    secret: 'god minwoo',
     resave: true,
     saveUninitialized: false,
   }));
@@ -54,4 +54,5 @@ var setup = function (app) {
   });
 };
 
-exports.setup = setup;
+
+exports.setupGoogle = setupGoogle;

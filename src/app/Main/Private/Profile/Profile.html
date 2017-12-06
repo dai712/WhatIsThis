@@ -1,7 +1,22 @@
-<body>
+<link href="https://fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet">
+<body><div style="position:relative; left: 35%;">
+<img *ngIf="provider === 'google'" src="../../../assets/images/google.png" style="width:50px; height:50px;">
+<img *ngIf="provider === 'facebook'" src="../../../assets/images/facebook.png" style="width:50px; height:50px;"><br><br>
+</div>
+<h5>이메일 : {{returnAccount.Login.email}}</h5>
+<h5>닉네임 : {{returnAccount.Login.nickname}} <button class="myButton" (click)="mod = true;">수정</button></h5><br>
+<div *ngIf="mod" class="modify">
+  <h5>현재 닉네임 : {{returnAccount.Login.nickname}}<br>
+    <form #f="ngForm" (ngSubmit) = "modify(f)">
+      검색 : <input name="nick" ngModel>
+      <button>적용</button>
+    </form>
+    <button (click)="mod = false;" style="position: relative; left: 40%;">닫기</button></h5>
+</div>
+<h5>접속중인 유저</h5>
+<li *ngFor="let user of users" style="list-style: none;">
+  <h5>{{user.Login.nickname}}</h5>
+</li>
 
-이메일 : {{returnAccount.Login.email}}<br>
-닉네임 : {{returnAccount.Login.nickname}}<br>
-
-<button > <a href="/logout">로그아웃</a></button>
+<div style="position:relative; left: 35%;"><a href="/logout"><img src="../../../assets/images/Logouticon.png" style="width: 60px; height: 50px;" (click)="logout()"></a></div>
 </body>

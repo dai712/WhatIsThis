@@ -10,7 +10,8 @@
   var Finder = require('fs-finder');
 
 
-  require('./config/passport').setup(app);
+  require('./config/passportGoogle').setupGoogle(app);
+  require('./config/passportFacebook').setupFacebook(app);
   app.use(bodyParser.json());
   app.use(bodyParser.urlencoded({ extended: true}));
   app.use(function (req, res, next) {
@@ -21,10 +22,9 @@
 
 
 
-
+let current = [];
   //소켓 통신
   io.on('connection', function(socket){
-    console.log('aas');
     socket.on('add-message', function(msg){
       io.emit('chat-message', msg);
       console.log('에밋 : '+msg);
@@ -32,7 +32,25 @@
     socket.on('chat-message', function(msg){
       console.log('메세지 : ' + msg);
     });
+
+    socket.on('connectUser', function(usr){
+      io.emit('connecting-User', usr);
+      console.log('로그인' + usr);
+    });
+    socket.on('connecting-User', function(usr){
+      console.log('로그인중'+usr);
+    });
+  /*  socket.on('disconnect', function(usr){
+      console.log('유저는2' + usr);
+      for (let j = 0 ; j < current.length ; j++){
+        if(current[j].Login.id === usr.Login.id) {
+          let splice = current.splice(j, j);
+        }
+      }
+      console.log(current);
+    });*/
   });
+
   var loc = '';
   var storage = multer.diskStorage({
     destination: function (req, file, cb) {

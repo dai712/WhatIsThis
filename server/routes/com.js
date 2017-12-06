@@ -27,6 +27,7 @@ router.use(function (req, res, next) {
   next();
 });
 */
+
 router.post('/createNewId', function(req, res) {
   console.log(req.body.content);
 });
@@ -34,12 +35,10 @@ router.post('/createNewId', function(req, res) {
 router.post('/NewAccount', function (req, res) {
   console.log('새 아이디');
   var Account = new Client();
-  console.log(Account);
  Account.Login.id = req.body.content.id;
  Account.Login.nickname = req.body.content.nickname;
  Account.Login.email = req.body.content.email;
-  console.log('created new account: '+Account._id);
-
+ Account.Login.provider = req.body.content.provider;
   Account.save(function (err, savedAccount) {
     console.log(savedAccount);
     if(err) return console.log('error');
@@ -60,23 +59,27 @@ router.post('/checkUnique', function (req, res) {
 router.get('/login',function (req, res) {
   if(req.user){
     res.send(req.user);
+    console.log(req.user);
   } else {
     res.send('error');
   }
 
-  //res.redirect('/auth/google');
-  /*console.log(req.body.content);
-  //req.session.id = req.body.content.id;
-  console.log(req.session.id);
-  Client.findOne({ $and: [{'Login.id': req.body.content.id}, {'Login.password': req.body.content.password}]}, function (err, account) {
-    account.session = req.session;
-    console.log(account.session);
-    if(err) return console.error(err);
-    if(account==null) res.send(false);
-    else res.send(account);
-  })*/
 });
 
+router.get('/getAllUsers', function(req, res){
+  Client.find({}, function(err, Users){
+    if(err) console.log('err');
+    res.send(Users);
+  })
+});
+
+router.post('/changeNickname', function(req, res){
+  let id = req.user.id;
+  Client.findOneAndUpdate({'Login.id': id}, {$set: {'Login.nickname': req.body.content}}, {new: true}, function(err, updated){
+    console.log(updated);
+    res.send(updated);
+  });
+});
 
 router.post('/saveSchedule', function (req, res) {
   Client.findOneAndUpdate({id: req.body.content.id}, {Schedule : req.body.content},function (err, account) {
@@ -100,8 +103,9 @@ router.post('/createGroup', function(req, res){
   newGroup.Members.push(req.body.content[1]);
   newGroup.save(function(err, savedGroup){
     if(err) console.log('error');
-    console.log(savedGroup);
-    console.log(savedGroup.Members);
+    Client.findOneAndUpdate({'Login.id' : req.user.id}, {$push: {'Group': savedGroup._id}}, {new : true}, function(err, savedUser){
+      if(err) console.log('error');
+    });
     res.send(savedGroup);
   })
 });
@@ -114,17 +118,64 @@ router.get('/searchAllGroup', function(req, res){
   });
 });
 
-router.post('/joinGroup', function(req, res){
-  Group.findOneAndUpdate({_id: req.body.content[0]}, {$push: {Members : req.body.content[1]}}, function(err, updatedGroup){
-    if(err) console.log('error');
-    console.log(updatedGroup.Members);
+router.post('/getGroupDetail', function(req, res){
+  console.log(req.body.content);
+  Group.findOne({_id: req.body.content}, function(err, findedGroup){
+    res.send(findedGroup);
   });
 });
 
+router.post('/catUserFiles', function(req, res) {
+  // 0: 해당 아이디
+  // 2: group 검사
+  Client.findOne({'Login.id': req.body.content[0]}, function(err, findedUser){
+    let response = [];
+    console.log(findedUser);
+    if(req.user.id === findedUser.Login.id){
+      for(let i = 0 ; i < findedUser.Files.length ; i ++){
+        response.push(findedUser.Files[i].path);
+      }
+    } else {
+      for (let i = 0 ; i < findedUser.Files.length ; i++) {
+        if(findedUser.Files[i].access === 0) {
+          response.push(findedUser.Files[i].path);
+        } else if (findedUser.Files[i].access === 2 && req.body.content[1] === true) {
+          response.push(findedUser.Files[i].path);
+        }
+      }
+    }
+    res.send(response);
+  });
+});
+
+router.post('/joinGroup', function(req, res){
+  Group.findOne({_id: req.body.content[0], Members: req.user.id}, function(err, finded) {
+    if(finded){
+      let response = [];
+      response.push('이미 가입한 그룹');
+      console.log('찾음');
+      console.log(req.body.content[0]);
+      console.log(finded);
+      res.send(response);
+    }
+    else {
+      Group.findOneAndUpdate({_id: req.body.content[0]}, {$push: {Members : req.body.content[1]}},{new: true}, function(err, updatedGroup){
+        Client.findOneAndUpdate({'Login.id': req.user.id}, {$push: {Group: updatedGroup._id}}, {new: true}, function(err, updatedCliend){
+          if(err) console.log('error');
+        });
+        if(err) console.log('error');
+        console.log(updatedGroup.Members);
+      });
+    }
+
+  });
+
+});
+
 router.post('/withdrawGroup', function(req, res){
-  Group.findOneAndUpdate({_id: req.body.content[0]}, {$pull: {Members : req.body.content[1]}}, function(err, updatedGroup){
+  Group.findOneAndUpdate({_id: req.body.content[0]}, {$pull: {Members : req.body.content[1]}}, {new: true}, function(err, updatedGroup){
     if(err) console.log('error');
-    console.log(updatedGroup.Members);
+    console.log(updatedGroup);
   });
 });
 
@@ -147,9 +198,13 @@ router.post('/createPfile', function(req, res){
 router.post('/deletePfile', function(req, res){
   var filename = req.body.content[0];
   var id = req.body.content[1];
-  Client.findOne({'Login.id': id}, function(err, finded){
-    console.log(finded);
-  });
+  console.log(filename);
+  Client.findOneAndUpdate({'Login.id': id} , {$pull : {Files: {path: filename}}}, {new: true},
+    function(err, updated){
+      if(err) console.log(err);
+      console.log('업데이트된것 : ' + updated);
+      res.send(updated);
+    });
 });
 
 router.post('/getAccess', function(req, res){
@@ -196,6 +251,24 @@ router.post('/changePfileAccess', function(req, res) {
     console.log('업데이트된것 : ' + updated);
     res.send(updated);
     });
+});
+
+router.post('/createGFiles', function(req, res){
+  let id = req.body.content[1];
+  let path = req.body.content[0];
+    Group.findOneAndUpdate({_id: id}, {$push: {Files: path}}, {new : true} , function(err, updatedGroup){
+      console.log(updatedGroup);
+      if(err) console.log('error');
+    });
+});
+
+router.post('/removeGFiles', function(req, res){
+  let id= req.body.content[1];
+  let path = req.body.content[0];
+  Group.findOneAndUpdate({_id: id}, {$pull: {Files: path}}, {new : true}, function(err, updatedGroup){
+    console.log(updatedGroup);
+    if(err) console.log('error');
+  })
 });
 
 router.post('/allTask', function (req, res) {

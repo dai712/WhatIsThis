@@ -8,6 +8,8 @@ import {RouterModule} from '@angular/router';
 
 import {HttpClientModule} from '@angular/common/http';
 import {HttpService} from './HttpService';
+import {WindowRef} from "./window";
+
 
 import {CollaborationComponent} from './Main/Group/Collaboration/Collaboration';
 import {GroupRepositoryComponent} from './Main/Group/GroupRepository/GroupRepository';
@@ -20,9 +22,9 @@ import {ProfileComponent} from './Main/Private/Profile/Profile';
 import {PrivateComponent} from './Main/Private/Private';
 import {SearchComponent} from './Main/Search/Search';
 import {GroupRoutingComponent} from "./Main/Group/GroupRouting/GroupRouting";
-import {ModifyProfileComponent} from "./Main/Private/Profile/ModifyProfile";
 
 import {FileUploadModule} from '../../node_modules/ng2-file-upload/ng2-file-upload.js';
+
 
 
 @NgModule({
@@ -41,7 +43,6 @@ import {FileUploadModule} from '../../node_modules/ng2-file-upload/ng2-file-uplo
     ProfileComponent,
     SearchComponent,
     GroupRoutingComponent,
-    ModifyProfileComponent,
   ],
   imports: [
     FileUploadModule,
@@ -53,7 +54,6 @@ import {FileUploadModule} from '../../node_modules/ng2-file-upload/ng2-file-uplo
     ]),
     RouterModule.forChild([
       {path: 'private/:ID', component: PrivateComponent},
-      {path: 'modifyprofile/:ID', component: ModifyProfileComponent},
       {path: 'group/:ID', component: GroupComponent},
       {path: 'privaterepository/:ID', component: PrivateRepositoryComponent},
       {path: 'privateschedule/:ID', component: PrivateScheduleComponent},
@@ -68,6 +68,7 @@ import {FileUploadModule} from '../../node_modules/ng2-file-upload/ng2-file-uplo
   ],
   providers: [
     HttpService,
+    WindowRef
   ],
   bootstrap: [AppComponent]
 })

@@ -2,9 +2,9 @@ body {
   align-content: center;
 }
 .menudiv {
-  margin-top : 5%;
+  margin-top : 3%;
   margin-left : 5%;
-  margin-bottom : 5%;
+  margin-bottom : 3%;
   border: 1px solid black;
   float: left;
   width : 15%;
@@ -22,9 +22,12 @@ body {
   height : 80%;
 }
 .inner{
-  height: 70%;
+  height: 10%;
   width : 80%;
   margin-top: 3%;
   margin-left: 3%;
   border: 1px solid black;
+}
+h5 {
+  font-family: 'Ubuntu', sans-serif;
 }

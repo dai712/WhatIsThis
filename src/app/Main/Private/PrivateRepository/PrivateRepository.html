@@ -1,46 +1,46 @@
-
+<link href="http://fonts.googleapis.com/earlyaccess/notosanskr.css" rel="stylesheet">
 
 <body>
+<div class="repoMain">
+  <div class="list">
+    현재 위치 :<ul>
+     <li class="detail" *ngFor="let locs of changingDir; let i = index" (click)="changeDir(i)">{{locs}} / </li>
+    </ul>
+  </div><br>
+  <div class="main">
+      <div class="fileinput">
+        <input type="file" #f (change)="fileChangeEvent($event)" />
+        <button type="button" (click)="upload()">Upload</button>
+      </div>
+      <div style="border: 1px solid blanchedalmond">
+        Private : 검은색 / Public : 빨간색 / Group : 파란색 / Default : Public
+      </div>
+      <form  #f="ngForm" (ngSubmit)="makeDir(f)" novalidate>
+        <br>
+        디렉토리 생성 : <input name="dir" ngModel><br>
+        <button>생성</button>
+    </form>
+  </div>
+  <div *ngIf="clickAccess" class="changeAccess">
+        <p>선택한 파일 : {{clickedAccess[0]}}</p>
+        <p>현재 권한 : {{clickedAccess[1]}}</p><br><br>
 
-<div class="list">
-  현재 위치 :
-  <ul>
-   <li class="detail" *ngFor="let locs of changingDir; let i = index" (click)="changeDir(i)">{{locs}} / </li>
-  </ul>
-</div><br>
-<div class="main">
-    <div class="fileinput">
-      <input type="file" #f (change)="fileChangeEvent($event)" />
-      <button type="button" (click)="upload()">Upload</button>
-    </div>
-    <div>
-      검은색 : Private / 빨간색 : Public / 파란색 : Group / Default : Public
-    </div>
-    <form  #f="ngForm" (ngSubmit)="makeDir(f)" novalidate>
-      <br>
-      디렉토리 생성 : <input name="dir" ngModel><br>
-      <button>생성</button>
-  </form>
+    <button *ngIf="clickedAccess[1] !== 'Public'" (click)="changeAccess(clickedAccess[0], 'Public')">Public으로 변환</button>
+    <button *ngIf="clickedAccess[1] !== 'Private'" (click)="changeAccess(clickedAccess[0], 'Private')">Private으로 변환</button>
+    <button *ngIf="clickedAccess[1] !== 'Group'" (click)="changeAccess(clickedAccess[0], 'Group')">Group으로 변환</button>
+    <button (click)="clickAccess = false;">닫기</button>
+  </div>
+  <div *ngIf="loaded === 1">
+    <li (click)="enterDir(list)" *ngFor="let list of PrivateDirlist"> {{list}}  <button (click)="deleteFile(list)">삭제</button></li>
+    <li *ngFor="let list of PrivateFilelist; let i = index;">
+      <a href="http://localhost:3000/download/{{loc.substring(2, loc.length)}}/{{list}}" target="_blank" [ngClass]="{
+    'public' : accessList[i] === 'Public',
+    'private' : accessList[i] === 'Private',
+    'Group' : accessList[i] === 'Group'
+    }" >{{list}}</a>
+      <button (click)="deleteFile(list)">삭제</button> <button (click)="setAccess(list, accessList[i])">권한설정</button></li>
+  </div>
+    <p *ngIf="loaded === 0"> loading... </p>
+    <p *ngIf="loaded === 2"></p>
 </div>
-<div *ngIf="clickAccess" class="changeAccess">
-      <p>선택한 파일 : {{clickedAccess[0]}}</p>
-      <p>현재 권한 : {{clickedAccess[1]}}</p><br><br>
-
-  <button *ngIf="clickedAccess[1] !== 'Public'" (click)="changeAccess(clickedAccess[0], 'Public')">Public으로 변환</button>
-  <button *ngIf="clickedAccess[1] !== 'Private'" (click)="changeAccess(clickedAccess[0], 'Private')">Private으로 변환</button>
-  <button *ngIf="clickedAccess[1] !== 'Group'" (click)="changeAccess(clickedAccess[0], 'Group')">Group으로 변환</button>
-  <button (click)="clickAccess = false;">닫기</button>
-</div>
-<div *ngIf="loaded === 1">
-  <li (click)="enterDir(list)" *ngFor="let list of PrivateDirlist"> {{list}}  <button (click)="deleteFile(list)">삭제</button></li>
-  <li *ngFor="let list of PrivateFilelist; let i = index;">
-    <a href="http://localhost:3000/download/{{loc.substring(2, loc.length)}}/{{list}}" target="_blank" [ngClass]="{
-  'public' : accessList[i] === 'Public',
-  'private' : accessList[i] === 'Private',
-  'Group' : accessList[i] === 'Group'
-  }" >{{list}}</a>
-    <button (click)="deleteFile(list)">삭제</button> <button (click)="setAccess(list, accessList[i])">권한설정</button></li>
-</div>
-  <p *ngIf="loaded === 0"> loading... </p>
-  <p *ngIf="loaded === 2"></p>
 </body>

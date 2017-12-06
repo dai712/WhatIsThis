@@ -128,7 +128,7 @@ export class PrivateRepositoryComponent implements OnInit {
     const del: Array<string> = [];
     console.log(this.loc);
     formData.append('loc', this.loc + '/' + target);
-    del.push(target);
+    del.push(this.loc + '/' + target);
     del.push(this.id);
     alert('삭제하시겠습니까?');
 
@@ -137,6 +137,10 @@ export class PrivateRepositoryComponent implements OnInit {
     this.refresh();
   }
   makeDir(f: NgForm) {
+    if (f.value.dir === '') {
+      alert('디렉토리 이름을 설정해주세요');
+      return;
+    }
     const formData: any = new FormData();
     formData.append('loc', this.loc + '/' +  f.value.dir);
     this.http.post('/makeDir', formData).subscribe();

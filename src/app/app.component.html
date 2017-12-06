@@ -1,17 +1,20 @@
-<base href="/">
+<body>
+  <base href="/">
+<div>
+  <div *ngIf="isStart === 0" class="start">
+    <app-login (notifytoApp)="onNotifyfromLogin($event)"></app-login>
+  </div>
+  <div *ngIf="isStart === 1">
+    <div id="logo">
+      <img src="../assets/images/logo.png" class="logo" (click)="clickLogo()">
+    </div>
+    <div id="login">
+      <app-profile [id]="fromLoginId"></app-profile>
+    </div>
+    <div id="menu" >
+      <app-menu [ID]="fromLoginId"></app-menu>
+    </div>
 
-<div *ngIf="isStart === 0" class="start">
-  <app-login (notifytoApp)="onNotifyfromLogin($event)"></app-login>
+  </div>
 </div>
-<div *ngIf="isStart === 1">
-  <div id="logo">
-    <img src="../assets/images/img.jpg" class="logo" (click)="clickLogo()">
-  </div>
-  <div id="login">
-    <app-profile [id]="fromLoginId"></app-profile>
-  </div>
-  <div id="menu">
-    <app-menu [ID]="fromLoginId"></app-menu>
-  </div>
-
-</div>
+</body>

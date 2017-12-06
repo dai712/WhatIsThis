@@ -1,3 +1,29 @@
+<link href="http://fonts.googleapis.com/earlyaccess/notosanskr.css" rel="stylesheet">
+
 <body>
-그룹 파일
+<div class="repoMain">
+  <div class="list">
+    현재 위치 :<ul>
+    <li class="detail" *ngFor="let locs of changingDir; let i = index" (click)="changeDir(i)">{{locs}} / </li>
+  </ul>
+  </div><br>
+  <div class="main">
+    <div class="fileinput">
+      <input type="file" #f (change)="fileChangeEvent($event)" />
+      <button type="button" (click)="upload()">Upload</button>
+    </div>
+    <form  #f="ngForm" (ngSubmit)="makeDir(f)" novalidate>
+      <br>
+      디렉토리 생성 : <input name="dir" ngModel><br>
+      <button>생성</button>
+    </form>
+  </div>
+<li (click)="enterDir(dirs)" *ngFor="let dirs of groupDirList">
+  {{dirs}}
+</li>
+<li *ngFor="let files of groupFileList">
+  <a href="http://localhost:3000/download/{{loc.substring(2, loc.length)}}/{{files}}" target="_blank">{{files}}</a>
+    <button (click)="deleteFile(files)">삭제</button>
+</li>
+</div>
 </body>
