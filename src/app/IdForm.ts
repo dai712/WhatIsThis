@@ -1,5 +1,8 @@
 export class IdForm {
-  email: string;s
+  email: string;
   id: string;
   nickname: string;
+  provider: string;
 }
+
+// Client의 IdForm

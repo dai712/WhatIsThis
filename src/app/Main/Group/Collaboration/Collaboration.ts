@@ -15,12 +15,11 @@ export class CollaborationComponent implements OnInit {
   gid: string;
   printid: string;
   broad: Socketmsg;
-  private sub: any;
   private socket = io();
   constructor(private route: ActivatedRoute) {}
   ngOnInit() {
     this.broad = new Socketmsg();
-    this.sub = this.route.params.subscribe(params => {
+    this.route.params.subscribe(params => {
       this.pid = params['ID'];
       this.gid = params['GID'];
     });

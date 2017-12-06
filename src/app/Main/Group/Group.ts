@@ -49,8 +49,13 @@ export class GroupComponent implements OnInit {
     }
   }
   create(f: NgForm) {
+    this.groupForm = [];
     const formData: any = new FormData();
     var gid;
+    if (f.value.id === '') {
+      alert('그룹명을 입력해주세요');
+      return;
+    }
     this.groupForm.push(f.value.id);
     this.groupForm.push(this.id);
     this.httpService.createGroup(this.groupForm).subscribe(
@@ -83,15 +88,16 @@ export class GroupComponent implements OnInit {
   }
   clickSearchedGroup(clicked: any) {
     const joinGroup = [];
-
+    let message = '';
     joinGroup.push(clicked);
     joinGroup.push(this.id);
 
     console.log(clicked);
     const conf = confirm('선택한 그룹에 가입하시겠습니까?');
     if (conf === true) {
-      this.httpService.joinGroup(joinGroup).subscribe();
-      console.log('가입');
+      this.httpService.joinGroup(joinGroup).subscribe(result => {
+        alert(result);
+      });
     } else {
     }
   }

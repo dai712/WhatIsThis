@@ -24,6 +24,7 @@
     "@types/angular-file-upload": "^2.5.1",
     "angular-passport": "^1.0.6",
     "angular4-files-upload": "^1.0.2",
+    "auth0-js": "^8.11.3",
     "bcrypt-nodejs": "0.0.3",
     "body-parser": "^1.18.2",
     "bootstrap": "^3.3.7",

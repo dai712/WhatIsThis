@@ -1,3 +1,6 @@
+body {
+  font-family: 'Noto Sans KR';
+}
 a {
   cursor : pointer;
   border: 1px solid black;

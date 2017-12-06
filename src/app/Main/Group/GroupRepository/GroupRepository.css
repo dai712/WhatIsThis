@@ -1,0 +1,47 @@
+li {
+  text-align: center;
+  list-style : none;
+  border : 1px solid black;
+  cursor : pointer;
+}
+.repoMain {
+  font-family: 'Noto Sans KR';
+}
+.main {
+  position: relative;
+  margin-top: 5%;
+}
+.fileinput {
+  position: relative;
+  margin-bottom : 30px;
+  border: 1px solid blanchedalmond;
+}
+
+.class {
+  position: relative;
+}
+
+.detail {
+  border : none;
+  position: relative;
+  float : left;
+}
+.list {
+  position: relative;
+
+}
+a:link {
+  text-decoration : none;
+}
+a:visited {
+  text-decoration: none;
+}
+.public {
+  color : red;
+}
+.private {
+  color : black;
+}
+.group {
+  color : blue;
+}

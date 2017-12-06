@@ -8,6 +8,7 @@ const ClientSchema = new mongoose.Schema({
     email: String,
     id: String,
     nickname: String,
+    provider: String,
   },
   Files: [{
     path: String,

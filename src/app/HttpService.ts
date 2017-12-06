@@ -48,10 +48,10 @@ export class HttpService {
   getPfileAccess(contents: any) {
     return this.http.post('/com/getAccess', {content: contents});
   }
-<<<<<<< HEAD
-  changePfileAccess(contents: any){
+
+  changePfileAccess(contents: any) {
     return this.http.post('/com/changePfileAccess', {content: contents});
-=======
+  }
   addTask(Task: any) {
     return this.http.post('/com/addTask', {content: Task});
   }
@@ -63,6 +63,23 @@ export class HttpService {
   }
   changeTask(Task: any) {
     return this.http.post('com/changeTask', {content: Task});
->>>>>>> 7ca8d0323756342a27400e0e95fd686aa61a61eb
+  }
+  changeNickname(contents: any) {
+    return this.http.post('/com/changeNickname', {content: contents});
+  }
+  getAllUsers() {
+    return this.http.get('/com/getAllUsers');
+  }
+  getGroupDetail(contents: any) {
+    return this.http.post('/com/getGroupDetail', {content: contents});
+  }
+  catUserFiles(contents: any) {
+    return this.http.post('/com/catUserFiles', {content: contents});
+  }
+  createGFiles(contents: any) {
+    return this.http.post('/com/createGFiles', {content: contents});
+  }
+  deleteGFiles(contents: any) {
+    return this.http.post('/com/removeGFiles', {content: contents});
   }
 }

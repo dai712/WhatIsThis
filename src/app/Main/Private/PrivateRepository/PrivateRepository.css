@@ -4,15 +4,21 @@ li {
   border : 1px solid black;
   cursor : pointer;
 }
+.repoMain {
+  font-family: 'Noto Sans KR';
+}
+.main {
+  position: relative;
+  margin-top: 5%;
+}
 .fileinput {
+  position: relative;
   margin-bottom : 30px;
-  border: 1px solid black;
+  border: 1px solid blanchedalmond;
 }
 
 .class {
-  position: absolute;
-  left : -10%;
-  top: -20%;
+  position: relative;
 }
 
 .detail {
@@ -21,8 +27,7 @@ li {
   float : left;
 }
 .list {
-  position: absolute;
-  top : -7%;
+  position: relative;
 
 }
 a:link {
