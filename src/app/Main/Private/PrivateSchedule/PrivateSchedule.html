@@ -1,8 +1,8 @@
 <link rel="stylesheet" href="/node_modules/bootstrap/dist/css/bootstrap.css">
 <body>
-<div>
+<div >
   <ul>
-    <li *ngFor="let print of printtime">
+    <li class="time" *ngFor="let print of printtime">
       {{print}}
     </li>
 
@@ -19,7 +19,7 @@
       'innertime' : testTime(time3, time4) === false,
       'innerselect': testTime(time3, time4) === true
       }" (click)="clicktime(time3, time4)">
-        <p class="subjecttext" *ngIf=testSubject(time3,time4)>{{Schedules.subjects[displaySubjectIndex]}}</p>
+        <div class="subjecttext" *ngIf=testSubject(time3,time4)>{{Schedules.subjects[displaySubjectIndex]}}</div>
       </td>
     </tr>
   </table>
