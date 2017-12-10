@@ -18,6 +18,11 @@ const GroupSchema = new mongoose.Schema({
     name : String,
     content: String,
   }],
+  Todo: [{
+    title: String,
+    content: String,
+    status: String
+  }]
 });
 
 module.exports = mongoose.model('Group', GroupSchema);

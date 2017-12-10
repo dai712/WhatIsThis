@@ -16,9 +16,9 @@ const ClientSchema = new mongoose.Schema({
   }],
   Group: [String],
   Schedule: [{
-    subjects: String,
-    time: [String],
+    subjects: Array,
+    time: Array,
   }],
 });
-ClientSchema.replace
+// ClientSchema.replace
 module.exports = mongoose.model('Client', ClientSchema);

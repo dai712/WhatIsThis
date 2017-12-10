@@ -81,7 +81,9 @@ router.post('/changeNickname', function(req, res){
 });
 
 router.post('/saveSchedule', function (req, res) {
-  Client.findOneAndUpdate({id: req.body.content.id}, {Schedule : req.body.content},function (err, account) {
+  console.log("here");
+  console.log(req.body.content.id);
+  Client.findOneAndUpdate({'Login.id': req.body.content.id}, {Schedule : req.body.content},function (err, account) {
     console.log(account);
   });
 });
@@ -92,6 +94,14 @@ console.log(req.body.content);
   Client.findOne({'Login.id': req.body.content}, function(err, account){
     console.log(account);
     if(err) console.log('error');
+    else res.send(account);
+  })
+});
+
+router.post('/getGroup',function (req,res) {
+  console.log("getgroup");
+  Group.findOne({_id: req.body.content}, function(err, account){
+    if(err) console.log(err);
     else res.send(account);
   })
 });

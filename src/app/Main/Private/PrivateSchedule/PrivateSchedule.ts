@@ -20,13 +20,16 @@ export class PrivateScheduleComponent implements OnInit {
   seltime: Array<any>;
   Schedules: Table;
   input: Array<any>;
-
+  displaySubjectIndex: any;
+  delIndex:any;
   test: any;
 
   id: string;
   constructor(private route: ActivatedRoute,
               private httpService: HttpService) {}
   ngOnInit() {
+    this.delIndex=-1;
+    this.displaySubjectIndex=0;
     this.route.params.subscribe(params => {
       this.id = params['ID'];
     });
@@ -86,7 +89,7 @@ export class PrivateScheduleComponent implements OnInit {
     for (let i = 0 ; i < this.Schedules.time.length ; i++) {
       for (let j = 0; j < this.Schedules.time[i].length; j++) {
         if (row === this.Schedules.time[i][j][0] && col === this.Schedules.time[i][j][1]) {
-          alert('중복 선택하였습니다.');
+          this.delIndex=i;
           return;
         }
       }
@@ -109,6 +112,22 @@ export class PrivateScheduleComponent implements OnInit {
     }
     return false;
   }
+  testSubject(row: number, col: number) {
+
+    for (let i = 0 ; i < this.Schedules.time.length ; i++) {
+      for (let j = 0 ; j < this.Schedules.time[i].length ; j++) {
+        if (row === this.Schedules.time[i][j][0]  && col === this.Schedules.time[i][j][1]) {
+
+          this.displaySubjectIndex=i;
+          return true;
+        }
+      }
+    }
+
+    return false;
+  }
+
+
   clear() {
     this.seltime = [];
   }
@@ -125,7 +144,24 @@ export class PrivateScheduleComponent implements OnInit {
     }
   }
   saveSchedule() {
+    console.log("Schedule");
     console.log(this.Schedules);
     this.httpService.saveSchedule(this.Schedules).subscribe();
+  }
+
+  delSchedule(delIndex: any) {
+    if (delIndex === -1) {
+      alert('삭제할 과목을 클릭하세요')
+    }
+    this.Schedules.subjects.splice(this.delIndex, 1);
+    for (let i = 0; i < this.Schedules.subjects.length; i++) {
+      // console.log("res1 "+this.Schedules.subjects[i]);
+    }
+    this.Schedules.time.splice(this.delIndex, 1);
+    for (let i = 0; i < this.Schedules.subjects.length; i++) {
+      // console.log("res2 "+this.Schedules.time[i]);
+    }
+    this.httpService.saveSchedule(this.Schedules).subscribe();
+
   }
 }

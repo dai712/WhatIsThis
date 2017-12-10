@@ -1,8 +1,8 @@
 <link rel="stylesheet" href="/node_modules/bootstrap/dist/css/bootstrap.css">
 <body>
-<div>
+<div >
   <ul>
-    <li *ngFor="let print of printtime">
+    <li class="time" *ngFor="let print of printtime">
       {{print}}
     </li>
 
@@ -18,7 +18,9 @@
       <td *ngFor="let time4 of time2" [ngClass]="{
       'innertime' : testTime(time3, time4) === false,
       'innerselect': testTime(time3, time4) === true
-      }" (click)="clicktime(time3, time4)"></td>
+      }" (click)="clicktime(time3, time4)">
+        <div class="subjecttext" *ngIf=testSubject(time3,time4)>{{Schedules.subjects[displaySubjectIndex]}}</div>
+      </td>
     </tr>
   </table>
 
@@ -31,5 +33,6 @@
   </form>
   <button (click)="clear()">클리어</button>
   <button (click)="saveSchedule()">저장</button>
+  <button (click)="delSchedule(delIndex)">삭제</button>
 </div>
 </body>
