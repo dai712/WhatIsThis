@@ -59,7 +59,6 @@ router.post('/checkUnique', function (req, res) {
 router.get('/login',function (req, res) {
   if(req.user){
     res.send(req.user);
-    console.log(req.user);
   } else {
     res.send('error');
   }
@@ -325,6 +324,44 @@ router.post('/deleteTask', function (req, res) {
   //     if(err) return console.error(err);
   //   })
   // });
-})
+});
+
+router.post('/createDoc', function(req, res){
+  console.log(req.body.content);
+  let doc = new Object();
+  doc.name = req.body.content[1];
+  doc.content = '';
+  Group.findOneAndUpdate({_id: req.body.content[0]}, {$push: {Docs: doc}}, {new: true}, function(err, saved){
+    console.log(saved);
+    res.send(saved);
+  });
+});
+
+router.post('/getDoc', function(req, res){
+  Group.findOne({_id: req.body.content}, function(err, returned){
+    res.send(returned.Docs);
+  })
+});
+
+router.post('/changeDoc', function(req, res){
+  Group.findOneAndUpdate({_id: req.body.content[0], 'Docs._id': req.body.content[1]}, {$set: {'Docs.$.name' : req.body.content[2]}},
+    {new : true}, function(err, updated){
+    console.log(updated);
+    });
+});
+
+router.post('/deleteDoc', function(req, res){
+  Group.findOneAndUpdate({_id: req.body.content[0]}, {$pull: {Docs: {_id: req.body.content[1]}}},
+    {new : true}, function(err, updated){
+    console.log('삭제됨 : ' + updated);
+    });
+});
+
+router.post('/saveDoc', function(req, res){
+  Group.findOneAndUpdate({_id: req.body.content[0], 'Docs._id': req.body.content[1]},
+    {$set: {'Docs.$.content': req.body.content[2]}}, {new: true} , function(err, updated){
+    console.log(updated);
+    });
+});
 
 module.exports = router;

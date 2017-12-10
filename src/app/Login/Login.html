@@ -2,15 +2,12 @@
 <link href="https://fonts.googleapis.com/css?family=Spectral+SC" rel="stylesheet">
 <body>
 <div class="login">
-  <div *ngIf="isLogin === false" style="position: absolute; top: 30%; left: 30%"><h2>Loading...</h2></div>
-  <div *ngIf="isLogin">
+  <div *ngIf="isLogin === false">
       <h2 style="font-family: 'Spectral sc', serif"> Ajou Team-Project </h2><br>
       <h4>로그인 방법을 선택해주세요</h4>
     <a href="/auth/google"><img src="../assets/images/google.png" class="icon"/></a>
     <a href="/auth/facebook"><img src="../assets/images/facebook.png" class="icon"/></a>
       <div *ngIf="currentAccount">
-        <button (click)="SignUp()">이아이디로 로그인</button>
-        <button><a href="/logout">다시선택</a></button>
       </div>
   </div>
 </div>

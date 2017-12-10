@@ -3,6 +3,9 @@ body {
 }
 a {
   cursor : pointer;
-  border: 1px solid black;
-
+  text-decoration-style: solid;
+}
+img {
+  width : 20%;
+  height : 20%;
 }

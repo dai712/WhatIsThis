@@ -16,7 +16,7 @@ export class AppComponent implements OnInit {
     this.isStart = 0;
   }
   clickLogo() {
-    alert('click logo');
+    alert('메인홈페이지로 돌아갑니다.');
     const link = [''];
     this.router.navigate(link);
     this.zone.runOutsideAngular(() => {

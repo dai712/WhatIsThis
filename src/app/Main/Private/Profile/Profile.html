@@ -8,15 +8,11 @@
 <div *ngIf="mod" class="modify">
   <h5>현재 닉네임 : {{returnAccount.Login.nickname}}<br>
     <form #f="ngForm" (ngSubmit) = "modify(f)">
-      검색 : <input name="nick" ngModel>
+      닉네임 : <input name="nick" ngModel>
       <button>적용</button>
     </form>
     <button (click)="mod = false;" style="position: relative; left: 40%;">닫기</button></h5>
 </div>
-<h5>접속중인 유저</h5>
-<li *ngFor="let user of users" style="list-style: none;">
-  <h5>{{user.Login.nickname}}</h5>
-</li>
 
 <div style="position:relative; left: 35%;"><a href="/logout"><img src="../../../assets/images/Logouticon.png" style="width: 60px; height: 50px;" (click)="logout()"></a></div>
 </body>

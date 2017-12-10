@@ -1,0 +1,19 @@
+.list {
+  position: relative;
+  width: 30%;
+  height: 60%;
+}
+.docimg {
+  width: 35%;
+  height: 35%;
+}
+li {
+  margin-bottom: 10px;
+  float: inherit;
+}
+#A1 {
+  border: 3px blue;
+}
+.A1 {
+  border: 3px blue;
+}

@@ -82,4 +82,21 @@ export class HttpService {
   deleteGFiles(contents: any) {
     return this.http.post('/com/removeGFiles', {content: contents});
   }
+
+
+  createDoc(contents: any) {
+    return this.http.post('/com/createDoc', {content: contents});
+  }
+  getDoc(contents: any) {
+    return this.http.post('/com/getDoc', {content: contents});
+  }
+  changeDoc(contents: any) {
+    return this.http.post('/com/changeDoc', {content: contents});
+  }
+  deleteDoc(contents: any) {
+    return this.http.post('/com/deleteDoc', {content: contents});
+  }
+  saveDoc(contents: any) {
+    return this.http.post('/com/saveDoc', {content: contents});
+  }
 }

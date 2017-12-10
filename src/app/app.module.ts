@@ -22,10 +22,14 @@ import {ProfileComponent} from './Main/Private/Profile/Profile';
 import {PrivateComponent} from './Main/Private/Private';
 import {SearchComponent} from './Main/Search/Search';
 import {GroupRoutingComponent} from "./Main/Group/GroupRouting/GroupRouting";
+import {DocsComponent} from "./Main/Group/Collaboration/Docs/Docs";
 
 import {FileUploadModule} from '../../node_modules/ng2-file-upload/ng2-file-upload.js';
+import "froala-editor/js/froala_editor.pkgd.min.js";
+import { FroalaEditorModule, FroalaViewModule } from 'angular-froala-wysiwyg';
 
 
+import { SheetModule } from 'angular5-spreadsheet';
 
 @NgModule({
   declarations: [
@@ -43,6 +47,7 @@ import {FileUploadModule} from '../../node_modules/ng2-file-upload/ng2-file-uplo
     ProfileComponent,
     SearchComponent,
     GroupRoutingComponent,
+    DocsComponent,
   ],
   imports: [
     FileUploadModule,
@@ -53,6 +58,7 @@ import {FileUploadModule} from '../../node_modules/ng2-file-upload/ng2-file-uplo
       {path: '', redirectTo: '/', pathMatch: 'full'},
     ]),
     RouterModule.forChild([
+      {path: 'docs/:ID/:GID', component: DocsComponent},
       {path: 'private/:ID', component: PrivateComponent},
       {path: 'group/:ID', component: GroupComponent},
       {path: 'privaterepository/:ID', component: PrivateRepositoryComponent},
@@ -65,10 +71,14 @@ import {FileUploadModule} from '../../node_modules/ng2-file-upload/ng2-file-uplo
       {path: 'memberschedule/:ID/:GID', component: MemberScheduleComponent},
       {path: 'grouprouting/:ID/:GID', component: GroupRoutingComponent},
     ]),
+    FroalaViewModule.forRoot(),
+    FroalaEditorModule.forRoot(),
+  SheetModule,
   ],
   providers: [
     HttpService,
-    WindowRef
+    WindowRef,
+
   ],
   bootstrap: [AppComponent]
 })

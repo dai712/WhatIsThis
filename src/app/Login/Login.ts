@@ -27,22 +27,18 @@ export class LoginComponent implements OnInit {
     this.isIdChecked = false;
     this.currentAccount = '';
     this.httpService.login().subscribe(
-      result => this.currentAccount = result,
-    );
-    setTimeout(() => {
-      if (this.currentAccount) {
-        console.log(this.currentAccount);
-      } else {
-        this.socket.emit('connectUser', this.currentAccount.id);
-        this.isLogin = true;
+      result => {
+        console.log(result);
+        this.currentAccount = result;
+        if (this.currentAccount.id) {
+            this.isLogin = true;
+            this.SignUp();
+        }
       }
-      this.SignUp();
-    }, 1000);
-
+    );
   }
 
   SignUp() {
-    this.socket.emit('connectUser', this.currentAccount.id);
     console.log(this.currentAccount);
     this.createID.id = this.currentAccount.id;
     this.createID.email = this.currentAccount.emails[0].value;
@@ -67,12 +63,12 @@ export class LoginComponent implements OnInit {
         this.isIdChecked = true;
         this.httpService.createAccount(this.createID).subscribe();
         this.http.post('/joinMakeDir/', DataForm).subscribe();
+
       } else {
       }
     });
     console.log(this.currentAccount.id);
-    this.notifytoApp.emit(this.currentAccount.id);
-
     this.socket.emit('connectUser', this.currentAccount.id);
+    this.notifytoApp.emit(this.currentAccount.id);
   }
 }

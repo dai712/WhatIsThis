@@ -1,9 +1,8 @@
-<body>
-<h2>공동작업</h2> <h5> 수정중 : {{printid}}</h5>
-<textarea rows="4" [(ngModel)] = "msg" #myText (change)="sendModify(myText)"></textarea>
-<div class="members">
-  <h5>
-    접속중인 그룹원 :
-  </h5>
+<div class = "menudiv inner">
+  <div class="menudiv" (click)="routing('/docs/')">
+    <h5>문서</h5>
+  </div>
 </div>
-</body>
+<div class="main">
+  <router-outlet></router-outlet>
+</div>

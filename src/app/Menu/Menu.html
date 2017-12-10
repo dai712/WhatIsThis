@@ -2,18 +2,22 @@
 <link href="https://fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet">
 <body>
 <div class = "menudiv inner">
-  <div class="menudiv" (click)="routing('/private/')">
+  <div class="menudiv" (click)="routing('/private/'); clickroute = true;">
     <h5>Private</h5>
   </div>
-  <div class="menudiv" (click)="routing('/group/')">
+  <div class="menudiv" (click)="routing('/group/'); clickroute = true;">
     <h5>Group</h5>
   </div>
-  <div class="menudiv" (click)="routing('/search/')">
+  <div class="menudiv" (click)="routing('/search/'); clickroute = true;">
     <h5>Search Users</h5>
   </div>
 </div>
 <div class="main">
   <router-outlet></router-outlet>
+  <div class="welcome" *ngIf="clickroute === false">
+    <h2>AJou Team Project</h2>
+  </div>
 </div>
+
 </body>
 

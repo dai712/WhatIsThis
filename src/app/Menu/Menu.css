@@ -31,3 +31,6 @@ body {
 h5 {
   font-family: 'Ubuntu', sans-serif;
 }
+.welcome {
+  text-align: center;
+}

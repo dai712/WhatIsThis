@@ -29,6 +29,7 @@ export class PrivateRepositoryComponent implements OnInit {
   accessList: any;
   clickAccess: boolean;
   clickedAccess: Array<string>;
+  filestring: string;
   constructor(public http: HttpClient,
               public https: HttpService,
               private route: ActivatedRoute) {
@@ -98,6 +99,7 @@ export class PrivateRepositoryComponent implements OnInit {
     formData.append('uploads[]', files[0], files[0]['name']);
     formData2.append('id', this.id);
 
+
     create.push(this.loc + '/' + files[0]['name']);
     create.push(this.id);
     console.log(create[0]);
@@ -112,6 +114,7 @@ export class PrivateRepositoryComponent implements OnInit {
 
 
   fileChangeEvent(fileInput: any) {
+    console.log(<Array<File>>fileInput.target.files);
     this.filesToUpload = <Array<File>>fileInput.target.files;
   }
 

@@ -33,12 +33,14 @@ let current = [];
       console.log('메세지 : ' + msg);
     });
 
-    socket.on('connectUser', function(usr){
-      io.emit('connecting-User', usr);
-      console.log('로그인' + usr);
+
+
+    socket.on('add-spread', function(msg){
+      io.emit('emit-spread', msg);
+      console.log('스프레드: ', msg);
     });
-    socket.on('connecting-User', function(usr){
-      console.log('로그인중'+usr);
+    socket.on('emit-spread', function(msg){
+      console.log('스프레드: ', msg);
     });
   /*  socket.on('disconnect', function(usr){
       console.log('유저는2' + usr);

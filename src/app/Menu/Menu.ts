@@ -10,9 +10,11 @@ import {HttpService} from "../HttpService";
 export class MenuComponent implements OnInit {
   @Input() ID: string;
   currentAccount: any;
+  clickroute: boolean;
   constructor( private router: Router,
                private http: HttpService) { }
   ngOnInit() {
+    this.clickroute = false;
     this.ID = '';
     this.http.login().subscribe(
       result => {
