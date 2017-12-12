@@ -2,14 +2,14 @@
 <link href="/node_modules/froala-editor/css/froala_editor.pkgd.min.css" rel="stylesheet">
 <link href="/node_modules/font-awesome/css/font-awesome.min.css" rel="stylesheet">
 
-
+<p>Collaboration</p>
 <div *ngIf="isselected === false"  class="menu">
-  <button (click)="newDoc()">새로만들기</button>
+  <button (click)="newDoc()" style="cursor: pointer;">New file</button>
   <div class="list">
     <ul>
       <li *ngFor="let docs of docList"
-          style="list-style: none; border: 1px solid black; text-align: center; cursor: pointer;"
-          (click)="docClick(docs)">
+          style="list-style: none;  text-align: center; cursor: pointer;"
+          (click)="docClick(docs)" class="test">
         <img src="../../../../../assets/images/doc.PNG" class="docimg"/>
         <h4>{{docs.name}}</h4>
       </li>
@@ -20,9 +20,11 @@
   <h3>{{targetDoc.name}}</h3>
   <form #f="ngForm" (ngSubmit) = "modify(f)" *ngIf="changename">
     이름 : <input name="nick" ngModel>
-    <button>적용</button>
+    <button class="smallBtn">Summit</button>
   </form>
-  <button (click)="changename = true;">이름바꾸기</button> <button (click)="deleteDoc()">삭제</button> <button (click)="saveDoc()">저장</button> <br>
+  <button class="smallBtn" (click)="changename = true;">Change Name</button>
+  <button class="smallBtn" (click)="deleteDoc()">Delete</button>
+  <button class="smallBtn" (click)="saveDoc()">Save</button> <br>
   <h4>마지막 수정 :=> {{changing}}</h4>
   <div [froalaEditor]="options" [(froalaModel)]="editorContent" (keyup)="emitContent()"></div>
 </div>

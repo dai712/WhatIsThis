@@ -1,21 +1,21 @@
 
 <body>
-<div class="groupmenu">
-  <nav>
-    <a (click)="routing('/grouprepository/')">그룹 - 파일</a>
-    <a (click)="routing('/collaboration/')">그룹 - 공동작업</a>
-    <a (click)="routing('/grouptodo/')">그룹 - 할일</a>
-    <a (click)="routing('/memberschedule/')">그룹 - 스케쥴</a>
-    <div>
-      <router-outlet></router-outlet>
-    </div>
-  </nav>
-</div>
+<!--<div class="groupmenu">-->
+  <!--<nav>-->
+    <!--<a (click)="routing('/grouprepository/')">그룹 - 파일</a>-->
+    <!--<a (click)="routing('/collaboration/')">그룹 - 공동작업</a>-->
+    <!--<a (click)="routing('/grouptodo/')">그룹 - 할일</a>-->
+    <!--<a (click)="routing('/memberschedule/')">그룹 - 스케쥴</a>-->
+    <!--<div>-->
+      <!--<router-outlet></router-outlet>-->
+    <!--</div>-->
+  <!--</nav>-->
+<!--</div>-->
 <div class="groupdetail">
   <b *ngIf="loaded === false"> loading...</b>
   <h3>Member List</h3>
   <li *ngFor="let mems of members;let i = index" (click)="clickMember(i);clickname=true;">
-    <img src="../../../../assets/images/man.png" style="width : 4%; height: 4%; vertical-align: middle;" />
+    <img src="../../../../assets/images/man.png" style="width : 10%; height: 10%; vertical-align: middle;" />
     {{mems.Login.nickname}}
   </li>
 </div>
@@ -33,10 +33,12 @@
   <h5>이메일 : {{targetmember.Login.email}}</h5>
   <h5>닉네임 : {{targetmember.Login.nickname}}</h5>
   <h5>학교 : {{targetmember.Login.school}}</h5>
-  <h5>학번 : {{targetmember.Login.studentid}}</h5>프로젝트 :
+  <h5>학번 : {{targetmember.Login.studentid}}</h5>
+  <h5>프로젝트 :
   <li *ngFor="let group of groups; let i = index" style="text-align: center; cursor: pointer;">
     {{group.id}}
   </li>
+  </h5>
   <button (click)="cprofile = false; clickname=true;" style="position: relative; left: 70%;" class="btn">Back</button>
 </div>
 <div *ngIf="cfile" class="userdetail file" id="file">
@@ -45,5 +47,60 @@
   </li>
   <button (click)="cfile = false; clickname=true;" style="position: relative; left: 70%;" class="btn">Back</button>
 </div>
+<div *ngIf="cschedule" id="schedule">
+  <div class="timetable">
+    <ul class="ultime">
+      <li class="time" *ngFor="let print of printtime">
+        {{print}}
+      </li>
+    </ul>
+  </div>
+  <div class="schedule">
+    <table>
+      <tr>
+        <td *ngFor="let day of days">{{day.day}}</td>
+      </tr>
+      <tr *ngFor="let time3 of time">
+        <td *ngFor="let time4 of time2" [ngClass]="{
+      'innertime' : testTime(time3, time4) === false,
+      'innerselect': testTime(time3, time4) === true
+      }" (click)="clicktime(time3, time4)">
+          <div class="subjecttext" *ngIf=testSubject(time3,time4)>{{Schedules.subjects[displaySubjectIndex]}}</div>
+        </td>
+      </tr>
+    </table>
+  </div>
+  <button (click)="cschedule = false; clickname=true;" style="position: relative; left: 70%;" class="btn">Back</button>
+</div>
+<nav>
+  <div class="first">
+    <div class="repos" style="text-align: center;"> <a (click)="routing('/grouprepository/')">
+      <img src="../../../assets/images/folders.PNG" style="width: 200px; height: 200px"/><br>
+      <b>Repository</b></a>
+      <router-outlet></router-outlet>
+    </div>
+    <div class="todo" style="text-align: center;">
+      <a (click)="routing('/grouptodo/')">
+        <img src="../../../assets/images/shcedule.png" style="width: 200px; height: 200px"/><br>
+        <b>To do list</b></a>
+      <router-outlet></router-outlet>
+    </div>
+  </div>
+  <div class="second">
+    <div class="collabo" style="text-align: center;">
+      <a (click)="routing('/collaboration/')">
+        <img src="../../../assets/images/collaboration.png" style="width: 200px; height: 200px"/><br>
+        <b>Collaboration</b></a>
+      <router-outlet></router-outlet>
+    </div><br>
+
+    <div class="table" style="text-align: center;">
+      <a (click)="routing('/memberschedule/')">
+        <img src="../../../assets/images/time.png" style="width: 200px; height: 200px"/><br>
+        <b>Time table</b></a>
+      <router-outlet></router-outlet>
+    </div>
+  </div>
+</nav>
 </body>
 

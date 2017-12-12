@@ -2,5 +2,8 @@
   width: 100px;
   height: 100px;
 }
+.icon:hover {
+  opacity: 0.5;
+}
 .login {
 }

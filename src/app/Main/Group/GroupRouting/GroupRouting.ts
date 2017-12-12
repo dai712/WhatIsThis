@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from "@angular/router";
 import {HttpService} from "../../../HttpService";
-
+import {Table} from "../../Private/PrivateSchedule/Table";
 @Component({
   selector: 'app-grouprouting',
   templateUrl: './GroupRouting.html',
@@ -20,6 +20,16 @@ export class GroupRoutingComponent implements OnInit {
   targetmember: any;
   groups: Array<any>;
   filelist: Array<any>;
+
+  days: Array<any>;
+  time: Array<any>;
+  time2: Array<any>;
+  printtime: Array<any>;
+  seltime: Array<any>;
+  Schedules: Table;
+  input: Array<any>;
+  displaySubjectIndex: any;
+  test: any;
   constructor(private route: ActivatedRoute,
                           private router: Router,
               private https: HttpService,
@@ -82,5 +92,75 @@ export class GroupRoutingComponent implements OnInit {
     }
   }
   checkSchedule() {
+
+    // this.delIndex=-1;
+    this.displaySubjectIndex=0;
+    this.printtime = [];
+    for (let i = 9 ; i < 21 ; i++) {
+      this.printtime.push(i + '시');
+      this.printtime.push(i + '시 반');
+    }
+
+    this.days = [
+      {day: '월요일'},
+      {day: '화요일'},
+      {day: '수요일'},
+      {day: '목요일'},
+      {day: '금요일'},
+    ];
+
+    this.time2 = [ 1, 2, 3, 4, 5
+    ];
+
+    this.time = [];
+    for (let i = 1 ; i < 25 ; i++ ) {
+      this.time.push(i);
+    }
+    this.Schedules = new Table();
+    this.Schedules.id = '';
+    this.Schedules.time = [];
+    this.Schedules.subjects = [];
+    this.Schedules.id = this.targetmember.Login.id;
+    this.seltime = [];
+    this.https.getAccount(this.targetmember.Login.id).toPromise().then(result => {
+        this.test = result;
+        return this.test;
+      }
+    ).then(result => {
+        if (result.Schedule.length === 0) {
+        } else {
+          this.Schedules.time = result.Schedule[0].time;
+          this.Schedules.subjects = result.Schedule[0].subjects;
+          console.log(this.Schedules);
+        }
+      }
+    );
+  }
+  testTime(row: number, col: number) {
+    for (let i = 0 ; i < this.seltime.length ; i++ ) {
+      if (row === this.seltime[i][0]  && col === this.seltime[i][1]) {
+        return true;
+      }
+    }
+    for (let i = 0 ; i < this.Schedules.time.length ; i++) {
+      for (let j = 0 ; j < this.Schedules.time[i].length ; j++) {
+        if (row === this.Schedules.time[i][j][0]  && col === this.Schedules.time[i][j][1]) {
+          return true;
+        }
+      }
+    }
+    return false;
+  }
+  testSubject(row: number, col: number) {
+    for (let i = 0 ; i < this.Schedules.time.length ; i++) {
+      for (let j = 0 ; j < this.Schedules.time[i].length ; j++) {
+        if (row === this.Schedules.time[i][j][0]  && col === this.Schedules.time[i][j][1]) {
+
+          this.displaySubjectIndex=i;
+          return true;
+        }
+      }
+    }
+    return false;
   }
 }

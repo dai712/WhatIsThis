@@ -34,8 +34,29 @@
     </li>
     <button (click)="cfile = false; clickname=true;" style="position: relative; left: 70%;" class="btn">Back</button>
   </div>
-  <div *ngIf="cschedule" class="detail schedule" id="schedule">
-    스케쥴
+  <div *ngIf="cschedule" id="schedule">
+    <div class="timetable">
+      <ul class="ultime">
+        <li class="time" *ngFor="let print of printtime">
+          {{print}}
+        </li>
+      </ul>
+    </div>
+    <div class="schedule">
+      <table>
+        <tr>
+          <td *ngFor="let day of days">{{day.day}}</td>
+        </tr>
+        <tr *ngFor="let time3 of time">
+          <td *ngFor="let time4 of time2" [ngClass]="{
+      'innertime' : testTime(time3, time4) === false,
+      'innerselect': testTime(time3, time4) === true
+      }" (click)="clicktime(time3, time4)">
+            <div class="subjecttext" *ngIf=testSubject(time3,time4)>{{Schedules.subjects[displaySubjectIndex]}}</div>
+          </td>
+        </tr>
+      </table>
+    </div>
     <button (click)="cschedule = false; clickname=true;" style="position: relative; left: 70%;" class="btn">Back</button>
   </div>
 </body>

@@ -36,8 +36,8 @@ export class PrivateScheduleComponent implements OnInit {
     this.printtime = [];
 
     for (let i = 9 ; i < 21 ; i++) {
-      this.printtime.push(i + '시');
-      this.printtime.push(i + '시 반');
+      this.printtime.push(i + ' : 00');
+      this.printtime.push(i + ' : 30');
     }
 
     this.days = [
@@ -66,14 +66,14 @@ export class PrivateScheduleComponent implements OnInit {
         return this.test;
       }
     ).then(result => {
-      if (result.Schedule.length === 0) {
-      } else {
-        this.Schedules.time = result.Schedule[0].time;
-        this.Schedules.subjects = result.Schedule[0].subjects;
-        console.log(this.Schedules);
+        if (result.Schedule.length === 0) {
+        } else {
+          this.Schedules.time = result.Schedule[0].time;
+          this.Schedules.subjects = result.Schedule[0].subjects;
+          console.log(this.Schedules);
+        }
       }
-    }
-  );
+    );
   }
   clicktime(row: number, col: number) {
     this.input = [];
@@ -82,7 +82,7 @@ export class PrivateScheduleComponent implements OnInit {
       if (this.seltime[this.seltime.length - 1][1] !== col) {
         this.seltime = [];
       } else if (this.seltime[this.seltime.length - 1][0] + 1 < row
-                  || this.seltime[this.seltime.length - 1][0] - 1 > row ) {
+        || this.seltime[this.seltime.length - 1][0] - 1 > row ) {
         this.seltime = [];
       }
     }
@@ -99,9 +99,9 @@ export class PrivateScheduleComponent implements OnInit {
   }
   testTime(row: number, col: number) {
     for (let i = 0 ; i < this.seltime.length ; i++ ) {
-        if (row === this.seltime[i][0]  && col === this.seltime[i][1]) {
-          return true;
-        }
+      if (row === this.seltime[i][0]  && col === this.seltime[i][1]) {
+        return true;
+      }
     }
     for (let i = 0 ; i < this.Schedules.time.length ; i++) {
       for (let j = 0 ; j < this.Schedules.time[i].length ; j++) {

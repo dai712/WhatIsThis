@@ -3,34 +3,40 @@
 <body>
 
 <div class="group select">
-  <h3><a (click)="openGroup(0); clickdetail = false;">그룹 생성</a></h3><br>
-  <h3><a (click)="openGroup(1); clickdetail = false;">그룹 검색</a></h3><br>
-  <h3><a (click)="openGroup(2); clickdetail = false;">가입 그룹</a></h3><br>
+
+  <p><button class="btnCrt" (click)="openGroup(0); clickdetail = false;"><b>새 그룹 생성</b></button></p><br>
+  <p><button class="btnCrt" (click)="openGroup(1); clickdetail = false;"><b>기존 그룹 검색</b></button></p><br>
+  <p><button class="btnCrt" (click)="openGroup(2); clickdetail = false;"><b>가입 그룹 목록</b></button></p><br>
+
 </div>
 <div class="group detail">
     <form *ngIf="group[0]" #f="ngForm" (ngSubmit) = "create(f)">
-      그룹 이름 : <input name="id" ngModel><br>
-      <button>생성</button>
+      새 그룹 이름 : <input name="id" ngModel>
+      <button class="btn">생성</button>
     </form>
     <form *ngIf="group[1]" #f="ngForm" (keyup) = "search(f)">
+
       검색 : <input name="search" ngModel>
-      <li *ngFor="let groups of grouplist2;">{{groups.id}}
-        <button (click)="clickSearchedGroup(groups._id)">Join</button>
-        <button (click)="getGroupDetail(groups); clickdetail = true;">Detail</button>
-      </li>
+      <li *ngFor="let groups of grouplist2;">
+        <img src="../../../assets/images/group.png" style="width : 3%; height: 3%; vertical-align: middle; float:left; margin-left : 5px;"/>
+        {{groups.id}}
+        <button (click)="clickSearchedGroup(groups._id)" class="btn" style="float:right;">Join</button>
+        <button (click)="getGroupDetail(groups); clickdetail = true;" class="btn" style="float:right;">Detail</button>
+
     </form>
   <div class="groupinfo" *ngIf="clickdetail">
     그룹명 : {{targetgroup.id}} <br>
     그룹장 : {{groupmaster}} <br>
     작업 수 : {{targetgroup.Members.length}} <br>
     파일 수 : {{targetgroup.Files.length}} <br>
-    <button (click)="clickdetail=false;">Back</button>
+    <button (click)="clickdetail=false;" class="btn">Back</button>
   </div>
     <form *ngIf="group[2]">
-      가입그룹
-      <li *ngFor="let groups of grouplist3">{{groups.id}}
-        <button (click)="enterJoinedGroup(groups._id)">Enter</button>
-        <button (click)="removeJoinedGroup(groups._id)">탈퇴</button>
+      <li *ngFor="let groups of grouplist3">
+        <img src="../../../assets/images/group.png" style="width : 3%; height: 3%; vertical-align: middle; float:left; margin-left : 5px;"/>
+        {{groups.id}}
+        <button (click)="enterJoinedGroup(groups._id)" class="btn" style="float:right;">Enter</button>
+        <button (click)="removeJoinedGroup(groups._id)" class="btn" style="float:right;">Withdrawal</button>
       </li>
     </form>
 </div>

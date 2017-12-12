@@ -45,6 +45,7 @@ a:visited {
 .group {
   color : blue;
 }
+
 .btn {
   background: #47c9af;
   background-image: -webkit-linear-gradient(top, #47c9af, #47c9af);
@@ -74,4 +75,10 @@ ul > li:hover {
 }
 li:hover {
   background: white;
+}
+p {
+  font-family: 'Roboto', sans-serif;
+  font-size: 40px;
+  color: black;
+
 }
