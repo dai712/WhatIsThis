@@ -14,11 +14,11 @@ div {
 ul {
   position :absolute;
   align-content: inherit;
-  left : -4%;
-  top: 2.5%;
+  left : -3%;
+  top: 27%;
 }
 li {
-  margin-bottom : 5.5px;
+  margin-bottom : 4px;
   list-style : none;
 }
 table {
@@ -93,3 +93,9 @@ tr {
   /*background: #efefef;*/
   /*float:left;*/
 }
+p {
+  font-family: 'Roboto', sans-serif;
+  font-size: 40px;
+  color: black;
+}
+

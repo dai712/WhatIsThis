@@ -3,17 +3,23 @@
 
 }
 a {
-  border: 1px solid black;
+  /*border: 1px solid black;*/
   cursor : pointer;
 }
 .groupdetail {
   position : absolute;
-  top : 20%;
+  top : 15%;
+  left: 80%;
+
 }
 li {
   list-style: none;
   cursor : pointer;
-
+  border-left : 3px solid  #47c9af;
+  border-bottom : 1px solid  #47c9af;
+}
+li:hover {
+  opacity: 0.5;
 }
 .userdetail{
   background-color: white;
@@ -63,4 +69,23 @@ a:visited {
 .btn:hover {
   background: #3cb0fd;
   text-decoration: none;
+}
+nav {
+  padding-bottom: 10%;
+}
+.first {
+  float: left;
+  padding-left: 10%;
+  padding-top: 5%;
+}
+
+.second {
+  float: left;
+  padding-left: 10%;
+  padding-right: 5%;
+  padding-top: 5%;
+}
+
+.repos {
+  padding-bottom: 10%;
 }

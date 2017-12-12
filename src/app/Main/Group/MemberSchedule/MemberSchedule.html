@@ -1,5 +1,8 @@
 <link rel="stylesheet" href="/node_modules/bootstrap/dist/css/bootstrap.css">
 <body>
+<div class="sub">
+  <p>Time table</p>
+</div>
 <div>
   <ul>
     <li class="time" *ngFor="let print of printtime">
@@ -7,24 +10,25 @@
     </li>
 
   </ul>
-</div>
-<div class="schedule">
+  <div class="schedule">
 
-  <table>
-    <tr>
-      <td *ngFor="let day of days">{{day.day}}</td>
-    </tr>
+    <table>
+      <tr>
+        <td *ngFor="let day of days">{{day.day}}</td>
+      </tr>
 
-    <tr *ngFor="let time3 of time">
-      <td *ngFor="let time4 of time2" [ngClass]="{
+      <tr *ngFor="let time3 of time">
+        <td *ngFor="let time4 of time2" [ngClass]="{
       'innertime' : testTime(time3, time4) === false,
       'innerselect': testTime(time3, time4) === true
       }" >
 
-      </td>
-    </tr>
-  </table>
+        </td>
+      </tr>
+    </table>
 
+  </div>
 </div>
+
 
 </body>

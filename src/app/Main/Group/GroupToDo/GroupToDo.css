@@ -49,3 +49,8 @@ li {
   /*overflow: auto;*/
   /*white-space: initial;*/
 }
+p {
+  font-family: 'Roboto', sans-serif;
+  font-size: 40px;
+  color: black;
+}

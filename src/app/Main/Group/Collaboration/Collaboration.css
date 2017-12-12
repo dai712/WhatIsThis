@@ -11,3 +11,9 @@ textarea {
   height: 400px;
   border: 1px solid black;
 }
+
+p {
+  font-family: 'Roboto', sans-serif;
+  font-size: 40px;
+  color: black;
+}

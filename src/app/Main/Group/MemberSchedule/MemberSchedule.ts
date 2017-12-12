@@ -40,8 +40,8 @@ export class MemberScheduleComponent implements OnInit {
     this.printtime = [];
 
     for (let i = 9 ; i < 21 ; i++) {
-      this.printtime.push(i + '시');
-      this.printtime.push(i + '시 반');
+      this.printtime.push(i + ' : 00');
+      this.printtime.push(i + ' : 30');
     }
 
     this.days = [
