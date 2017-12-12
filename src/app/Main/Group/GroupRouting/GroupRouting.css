@@ -12,4 +12,55 @@ a {
 }
 li {
   list-style: none;
+  cursor : pointer;
+
+}
+.userdetail{
+  background-color: white;
+  opacity: 0.85;
+  position: absolute;
+  top: 20%;
+  left: 30%;
+  width : 400px;
+  height : 200px;
+  border: 1px solid black;
+}
+.group {
+  height: 500px;
+}
+.file {
+  position: absolute;
+  top: 5%;
+  left: 15%;
+  width: 600px;
+  height: 600px;
+}
+a:link {
+  text-decoration : none;
+}
+a:visited {
+  text-decoration: none;
+}
+.btn {
+  background: #47c9af;
+  background-image: -webkit-linear-gradient(top, #47c9af, #47c9af);
+  background-image: -moz-linear-gradient(top, #47c9af, #47c9af);
+  background-image: -ms-linear-gradient(top, #47c9af, #47c9af);
+  background-image: -o-linear-gradient(top, #47c9af, #47c9af);
+  background-image: linear-gradient(to bottom, #47c9af, #47c9af);
+  -webkit-border-radius: 28;
+  -moz-border-radius: 28;
+  border-radius: 3px;
+  font-family: Arial;
+  color: #ffffff;
+  font-size: 14px;
+  padding: 3px 8px 3px 8px;
+  text-decoration: none;
+  border-style : none;
+  margin-left : 4px;
+}
+
+.btn:hover {
+  background: #3cb0fd;
+  text-decoration: none;
 }

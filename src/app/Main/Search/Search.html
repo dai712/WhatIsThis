@@ -23,7 +23,7 @@
     <h5>닉네임 : {{check.Login.nickname}}</h5>
     <h5>학교 : {{check.Login.school}}</h5>
     <h5>학번 : {{check.Login.studentid}}</h5>프로젝트 :
-    <li *ngFor="let group of groups; let i = index" (click)="clickedGroup(i)" style="text-align: center; cursor: pointer;">
+    <li *ngFor="let group of groups; let i = index" style="text-align: center; cursor: pointer;">
       {{group.id}}
     </li>
     <button (click)="cprofile = false; clickname=true;" style="position: relative; left: 70%;" class="btn">Back</button>

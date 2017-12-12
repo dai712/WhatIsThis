@@ -116,7 +116,7 @@ export class GroupComponent implements OnInit {
             this.grouplist3.push(this.grouplist[i]);
           }
         }
-      }}, 1500);
+      }}, 500);
   }
   removeJoinedGroup(clicked: any) {
     console.log(clicked);
