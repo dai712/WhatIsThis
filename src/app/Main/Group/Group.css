@@ -39,6 +39,7 @@ li {
   height : 70%;
 }
 .groupinfo {
+  background-color : white;
   cursor : default;
   position : absolute;
   top : 30%;

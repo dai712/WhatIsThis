@@ -14,7 +14,7 @@ li {
 .fileinput {
   position: relative;
   margin-bottom : 30px;
-  border: 1px solid blanchedalmond;
+  border: 1px solid #47c9af;
 }
 
 .class {
@@ -44,4 +44,34 @@ a:visited {
 }
 .group {
   color : blue;
+}
+.btn {
+  background: #47c9af;
+  background-image: -webkit-linear-gradient(top, #47c9af, #47c9af);
+  background-image: -moz-linear-gradient(top, #47c9af, #47c9af);
+  background-image: -ms-linear-gradient(top, #47c9af, #47c9af);
+  background-image: -o-linear-gradient(top, #47c9af, #47c9af);
+  background-image: linear-gradient(to bottom, #47c9af, #47c9af);
+  -webkit-border-radius: 28;
+  -moz-border-radius: 28;
+  border-radius: 3px;
+  font-family: Arial;
+  color: #ffffff;
+  font-size: 14px;
+  padding: 3px 8px 3px 8px;
+  text-decoration: none;
+  border-style : none;
+  margin-left : 4px;
+  cursor: pointer;
+}
+
+.btn:hover {
+  background: #3cb0fd;
+  text-decoration: none;
+}
+ul > li:hover {
+  text-decoration-line: underline;
+}
+li:hover {
+  background: white;
 }

@@ -9,7 +9,7 @@
 <h5>닉네임 : {{returnAccount.Login.nickname}}</h5>
 <h5>학교 : {{returnAccount.Login.school}}</h5>
 <h5>학번 : {{returnAccount.Login.studentid}}</h5>
-  <button class="myButton" (click)="mod = true;">수정</button><br>
+  <button class="btn" (click)="mod = true;">Modify</button><br>
 <div *ngIf="mod" class="modify">
     <form #f="ngForm" (ngSubmit) = "modify(f)">
       닉네임 : <input name="nick" ngModel>

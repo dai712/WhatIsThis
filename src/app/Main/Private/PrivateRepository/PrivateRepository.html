@@ -40,9 +40,12 @@
     <button (click)="clickAccess = false;" class="btn">Close</button>
   </div>
   <div *ngIf="loaded === 1">
-    <li (click)="enterDir(list)" *ngFor="let list of PrivateDirlist"><img src="../../../../assets/images/folder.png"  style="width : 2%; height: 2%; float:left; vertical-align : middle; margin-left: 1px;"/> {{list}}
+    <li (click)="enterDir(list)" *ngFor="let list of PrivateDirlist">
+      <img src="../../../../assets/images/folder.png"  style="width : 2%; height: 2%; float:left; vertical-align : middle; margin-left: 1px;"/>
+      {{list}}
       <button (click)="deleteFile(list)" style="float : right;" class="btn">Delete</button></li>
-    <li *ngFor="let list of PrivateFilelist; let i = index;"><img src="../../../../assets/images/filerepo.png"  style="width : 2%; height: 2%; float:left;vertical-align : middle; margin-left: 1px;"/>
+    <li *ngFor="let list of PrivateFilelist; let i = index;">
+      <img src="../../../../assets/images/filerepo.png"  style="width : 2%; height: 2%; float:left;vertical-align : middle; margin-left: 1px;"/>
       <a href="http://localhost:3000/download/{{loc.substring(2, loc.length)}}/{{list}}" target="_blank" [ngClass]="{
     'public' : accessList[i] === 'Public',
     'private' : accessList[i] === 'Private',

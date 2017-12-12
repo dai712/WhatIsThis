@@ -14,7 +14,10 @@
 <div class="groupdetail">
   <b *ngIf="loaded === false"> loading...</b>
   <h3>Member List</h3>
-  <li *ngFor="let mems of members;let i = index" (click)="clickMember(i);clickname=true;">{{mems.Login.nickname}}</li>
+  <li *ngFor="let mems of members;let i = index" (click)="clickMember(i);clickname=true;">
+    <img src="../../../../assets/images/man.png" style="width : 4%; height: 4%; vertical-align: middle;" />
+    {{mems.Login.nickname}}
+  </li>
 </div>
 <div class="userdetail" *ngIf="clickname">
   확인할 것 선택<br><br><br>

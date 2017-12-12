@@ -1,29 +1,33 @@
 <link href="http://fonts.googleapis.com/earlyaccess/notosanskr.css" rel="stylesheet">
-
+<link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
 <body>
+<h1 style="font-family: 'Roboto', sans-serif; color: black;">Group Drive</h1><br>
 <div class="repoMain">
   <div class="list">
-    현재 위치 :<ul>
-    <li class="detail" *ngFor="let locs of changingDir; let i = index" (click)="changeDir(i)">{{locs}} / </li>
+    <ul>
+      <img src="../../../../assets/images/foldertree.png" style="width :5%; height: 5%; float:left; vertical-align : middle; margin-right : 20px; background-color: beige; position: relative; top: -20px;"/>
+      <li class="detail" *ngFor="let locs of changingDir; let i = index" (click)="changeDir(i)" style="color: black;">{{locs}} / </li>
   </ul>
   </div><br>
   <div class="main">
     <div class="fileinput">
-      <input type="file" #f (change)="fileChangeEvent($event)" />
-      <button type="button" (click)="upload()">Upload</button>
+      <input type="file" #f (change)="fileChangeEvent($event)"  style="font-weight: bold;"/>
+      <button type="button" (click)="upload()" class="btn">Upload</button>
     </div>
     <form  #f="ngForm" (ngSubmit)="makeDir(f)" novalidate>
       <br>
-      디렉토리 생성 : <input name="dir" ngModel><br>
-      <button>생성</button>
+      디렉토리 생성 : <input name="dir" ngModel>
+      <button class="btn">생성</button>
     </form>
   </div>
 <li (click)="enterDir(dirs)" *ngFor="let dirs of groupDirList">
+  <img src="../../../../assets/images/folder.png"  style="width : 2%; height: 2%; float:left; vertical-align : middle; margin-left: 1px;"/>
   {{dirs}}
 </li>
 <li *ngFor="let files of groupFileList">
+  <img src="../../../../assets/images/filerepo.png"  style="width : 2%; height: 2%; float:left;vertical-align : middle; margin-left: 1px;"/>
   <a href="http://localhost:3000/download/{{loc.substring(2, loc.length)}}/{{files}}" target="_blank">{{files}}</a>
-    <button (click)="deleteFile(files)">삭제</button>
+    <button (click)="deleteFile(files)" style="float : right;" class="btn">Delete</button>
 </li>
 </div>
 </body>

@@ -19,7 +19,8 @@ export class GroupComponent implements OnInit {
   grouplist2: any;
   grouplist3: any;
   clickdetail: boolean;
-  groupmaster : string;
+  groupmaster: string;
+  targetgroup: any;
   constructor(public http: HttpClient,
               private route: ActivatedRoute,
               private router: Router,
@@ -153,6 +154,7 @@ export class GroupComponent implements OnInit {
   }
 
   getGroupDetail(clicked: any) {
+    this.targetgroup = clicked;
     let temp: any;
     console.log(clicked.Members[0]);
     this.httpService.getAccount(clicked.Members[0]).subscribe(result => {

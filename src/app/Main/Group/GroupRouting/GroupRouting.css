@@ -58,9 +58,17 @@ a:visited {
   text-decoration: none;
   border-style : none;
   margin-left : 4px;
+  cursor: pointer;
 }
 
 .btn:hover {
   background: #3cb0fd;
   text-decoration: none;
+}
+li {
+  border-left : 3px solid  #47c9af;
+  border-bottom : 1px solid  #47c9af;
+}
+li:hover {
+  opacity: 0.5;
 }
