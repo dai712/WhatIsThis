@@ -11,9 +11,11 @@ export class MenuComponent implements OnInit {
   @Input() ID: string;
   currentAccount: any;
   clickroute: boolean;
+  clickedmenu: number;
   constructor( private router: Router,
                private http: HttpService) { }
   ngOnInit() {
+    this.clickedmenu = 0;
     this.clickroute = false;
     this.ID = '';
     this.http.login().subscribe(

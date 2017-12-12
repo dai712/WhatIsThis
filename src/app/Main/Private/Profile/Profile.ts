@@ -28,7 +28,11 @@ export class ProfileComponent implements OnInit {
       }), 300);
   }
   modify(f: NgForm) {
-    this.http.changeNickname(f.value.nick).subscribe(result => {
+    const form = new Array();
+    form.push(f.value.nick);
+    form.push(f.value.school);
+    form.push(f.value.studentid);
+    this.http.changeProfile(form).subscribe(result => {
       this.returnAccount = result;
     });
     this.mod = false;

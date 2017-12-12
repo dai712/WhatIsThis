@@ -14,6 +14,7 @@ import {NgForm} from "@angular/forms";
   styleUrls: ['./PrivateRepository.css']
 })
 export class PrivateRepositoryComponent implements OnInit {
+  mousehover : boolean;
   filesToUpload: Array<File> = [];
   text: string;
   id: string;
@@ -29,12 +30,13 @@ export class PrivateRepositoryComponent implements OnInit {
   accessList: any;
   clickAccess: boolean;
   clickedAccess: Array<string>;
-  filestring: string;
+
   constructor(public http: HttpClient,
               public https: HttpService,
               private route: ActivatedRoute) {
   }
   ngOnInit() {
+    this.mousehover = false;
     this.loaded = 0;
     this.sub = this.route.params.subscribe(params => {
       this.id = params['ID'];
@@ -133,10 +135,13 @@ export class PrivateRepositoryComponent implements OnInit {
     formData.append('loc', this.loc + '/' + target);
     del.push(this.loc + '/' + target);
     del.push(this.id);
-    alert('삭제하시겠습니까?');
+    const conf = confirm('삭제하시겠습니까?');
+    if (conf === true) {
+      this.http.post('/delete', formData).subscribe();
+      this.https.deletePfile(del).subscribe();
 
-    this.http.post('/delete', formData).subscribe();
-    this.https.deletePfile(del).subscribe();
+    } else {
+    }
     this.refresh();
   }
   makeDir(f: NgForm) {

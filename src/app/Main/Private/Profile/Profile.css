@@ -48,3 +48,10 @@ h5 {
   background-color: white;
   z-index: 2;
 }
+.all {
+  background-color: white;
+}
+
+img:hover {
+  opacity: 0.5;
+}

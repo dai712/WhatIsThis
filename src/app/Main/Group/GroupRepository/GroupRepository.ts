@@ -70,7 +70,7 @@ export class GroupRepositoryComponent implements OnInit {
     create.push(this.loc + '/' + files[0]['name']);
     create.push(this.gid);
 
-    this.https.createPfile(create).subscribe();
+    this.https.createGFiles(create).subscribe();
     this.http.post('/uploads/', formData)
       .subscribe(result => console.log('files', result));
     alert('업로드 완료!');

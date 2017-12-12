@@ -3,9 +3,9 @@
 <body>
 
 <div class="group select">
-  <p>그룹 생성 : <a (click)="openGroup(0)">클릭</a></p><br>
-  <p>그룹 검색 : <a (click)="openGroup(1)">클릭</a></p><br>
-  <p>가입 그룹 : <a (click)="openGroup(2)">클릭</a></p><br>
+  <h3><a (click)="openGroup(0)">그룹 생성</a></h3><br>
+  <h3><a (click)="openGroup(1)">그룹 검색</a></h3><br>
+  <h3><a (click)="openGroup(2)">가입 그룹</a></h3><br>
 </div>
 <div class="group detail">
     <form *ngIf="group[0]" #f="ngForm" (ngSubmit) = "create(f)">
@@ -14,11 +14,26 @@
     </form>
     <form *ngIf="group[1]" #f="ngForm" (keyup) = "search(f)">
       검색 : <input name="search" ngModel>
-      <li *ngFor="let groups of grouplist2" (click)="clickSearchedGroup(groups._id)">{{groups.id}}</li>
+      <li *ngFor="let groups of grouplist2">{{groups.id}}
+        <button (click)="clickSearchedGroup(groups._id)">Join</button>
+        <button (click)="getGroupDetail(groups); clickdetail = true;">Detail</button>
+
+        <div class="groupinfo" *ngIf="clickdetail">
+          그룹명 : {{groups.id}} <br>
+          그룹장 : {{groupmaster}} <br>
+          작업 수 : {{groups.Members.length}} <br>
+          파일 수 : {{groups.Files.length}} <br>
+          <button (click)="clickdetail=false;">Back</button>
+        </div>
+      </li>
     </form>
     <form *ngIf="group[2]">
       가입그룹
-      <li *ngFor="let groups of grouplist3">{{groups.id}} <button (click)="enterJoinedGroup(groups._id)">입장</button> <button (click)="removeJoinedGroup(groups._id)">탈퇴</button> </li>
+      <li *ngFor="let groups of grouplist3">{{groups.id}}
+        <button (click)="enterJoinedGroup(groups._id)">Enter</button>
+        <button (click)="removeJoinedGroup(groups._id)">탈퇴</button>
+      </li>
     </form>
 </div>
+
 </body>

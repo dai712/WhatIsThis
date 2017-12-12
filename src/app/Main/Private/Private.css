@@ -9,3 +9,6 @@ img {
   width : 20%;
   height : 20%;
 }
+img:hover {
+  opacity : 0.5;
+}

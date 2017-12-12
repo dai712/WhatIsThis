@@ -3,6 +3,7 @@ import {HttpService} from "../../HttpService";
 import {WindowRef} from "../../window";
 import {ActivatedRoute} from "@angular/router";
 import {isUndefined} from "util";
+import {NgForm} from "@angular/forms";
 
 @Component({
   selector: 'app-search',
@@ -22,6 +23,7 @@ export class SearchComponent implements OnInit {
   str: string;
   Filelist: Array<string>;
   FileAccess: any;
+  searchList : any;
   constructor(private route: ActivatedRoute,
               private http: HttpService,
               private winRef: WindowRef
@@ -44,34 +46,33 @@ export class SearchComponent implements OnInit {
   refresh() {
     this.http.getAllUsers().subscribe(result => {
       this.results = result;
-      console.log(this.results);
+      this.searchList = result;
+
     });
     this.http.getAccount(this.id).subscribe(result => {
       this.User = result;
     });
   }
   clickSearchedUser(index: number) {
-    console.log(index);
-    this.check = this.results[index];
+
+    this.check = this.searchList[index];
   }
   checkProfile() {
     this.groups = [];
-    console.log(this.User);
-    console.log(this.check);
+
         for (let i = 0 ; i < this.check.Group.length ; i++) {
           this.http.getGroupDetail(this.check.Group[i]).subscribe(result => {
             this.groups.push(result);
           });
         }
-    console.log(this.groups);
+
   }
   checkRepository() {
     let group = false;
     let request = [];
     this.Filelist = [];
     let temp: any;
-    console.log(this.check.Group.length);
-    console.log(this.User);
+
 
     for (let i = 0 ; i < this.User.Group.length ; i++) {
       for (let j = 0 ; j < this.check.Group.length ; j++) {
@@ -102,5 +103,14 @@ export class SearchComponent implements OnInit {
   }
   clickedGroup(index: number) {
       console.log(this.groups[index]);
+  }
+  search(f: NgForm) {
+    this.searchList = [];
+    for (let i = 0 ; i < this.results.length ; i ++ ) {
+      if (this.results[i].Login.nickname.match(f.value.search)) {
+        this.searchList.push(this.results[i]);
+      }
+    }
+    console.log(this.searchList);
   }
 }

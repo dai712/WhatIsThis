@@ -10,14 +10,6 @@ const GroupSchema = new mongoose.Schema({
     name : String,
     content: String,
   }],
-  Sheets: [{
-    name : String,
-    content: String,
-  }],
-  Ppt: [{
-    name : String,
-    content: String,
-  }],
   Todo: [{
     title: String,
     content: String,

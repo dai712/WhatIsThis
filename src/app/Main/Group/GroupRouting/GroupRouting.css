@@ -6,3 +6,10 @@ a {
   border: 1px solid black;
   cursor : pointer;
 }
+.groupdetail {
+  position : absolute;
+  top : 20%;
+}
+li {
+  list-style: none;
+}

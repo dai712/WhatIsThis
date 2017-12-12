@@ -18,6 +18,8 @@ export class GroupComponent implements OnInit {
   grouplist: any;
   grouplist2: any;
   grouplist3: any;
+  clickdetail: boolean;
+  groupmaster : string;
   constructor(public http: HttpClient,
               private route: ActivatedRoute,
               private router: Router,
@@ -27,6 +29,7 @@ export class GroupComponent implements OnInit {
     this.sub = this.route.params.subscribe(params => {
       this.id = params['ID'];
     });
+    this.clickdetail = false;
     this.group = [];
     this.groupForm = [];
     this.grouplist = '';
@@ -147,5 +150,16 @@ export class GroupComponent implements OnInit {
     console.log(this.id);
     const link = ['/grouprouting/' + this.id + '/' + clicked];
     this.router.navigate(link);
+  }
+
+  getGroupDetail(clicked: any) {
+    let temp: any;
+    console.log(clicked.Members[0]);
+    this.httpService.getAccount(clicked.Members[0]).subscribe(result => {
+      temp = result;
+      this.groupmaster = temp.Login.nickname;
+    });
+
+    console.log(clicked);
   }
 }

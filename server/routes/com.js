@@ -39,6 +39,8 @@ router.post('/NewAccount', function (req, res) {
  Account.Login.nickname = req.body.content.nickname;
  Account.Login.email = req.body.content.email;
  Account.Login.provider = req.body.content.provider;
+ Account.Login.school = '';
+ Account.Login.studentid = '';
   Account.save(function (err, savedAccount) {
     console.log(savedAccount);
     if(err) return console.log('error');
@@ -72,9 +74,10 @@ router.get('/getAllUsers', function(req, res){
   })
 });
 
-router.post('/changeNickname', function(req, res){
+router.post('/changeProfile', function(req, res){
   let id = req.user.id;
-  Client.findOneAndUpdate({'Login.id': id}, {$set: {'Login.nickname': req.body.content}}, {new: true}, function(err, updated){
+  Client.findOneAndUpdate({'Login.id': id}, {$set: {'Login.nickname': req.body.content[0],
+    'Login.school' : req.body.content[1], 'Login.studentid' : req.body.content[2]}}, {new: true}, function(err, updated){
     console.log(updated);
     res.send(updated);
   });
@@ -197,7 +200,7 @@ router.post('/createPfile', function(req, res){
   console.log(req.body.content);
   var test = new Object();
   test.path = req.body.content[0];
-  test.access = '0'
+  test.access = '0';
   Client.findOneAndUpdate({'Login.id': req.body.content[1]}, {$push: {Files : test}}, function (err, updated){
    if(err) console.log(err);
    res.send(updated);

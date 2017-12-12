@@ -67,8 +67,8 @@ export class HttpService {
   changeTask(Task: any) {
     return this.http.post('com/changeTask', {content: Task});
   }
-  changeNickname(contents: any) {
-    return this.http.post('/com/changeNickname', {content: contents});
+  changeProfile(contents: any) {
+    return this.http.post('/com/changeProfile', {content: contents});
   }
   getAllUsers() {
     return this.http.get('/com/getAllUsers');

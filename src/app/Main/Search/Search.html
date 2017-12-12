@@ -4,35 +4,38 @@
   <div class="search">
     <form  #f="ngForm" (keyup) = "search(f)">
       검색 : <input name="search" ngModel>
-      <li *ngFor="let result of results; let i = index" (click)="clickSearchedUser(i); clickname = true;
+      <li *ngFor="let result of searchList; let i = index" (click)="clickSearchedUser(i); clickname = true;
     cprofile = false; cfile = false; cschedule = false;">닉네임 : {{result.Login.nickname}}</li>
     </form>
   </div>
   <div *ngIf="clickname" class="detail">
     확인할 것 선택<br><br><br>
     <div style="position: relative; left: 30%;">
-      <button (click)="checkProfile(); cprofile = true; clickname = false;">Profile</button>
-      <button (click)="checkRepository(); cfile = true; clickname = false;">File</button>
-      <button (click)="checkSchedule(); cschedule = true; clickname = false;">Schedule</button>
+      <button (click)="checkProfile(); cprofile = true; clickname = false;" class="btn">Profile</button>
+      <button (click)="checkRepository(); cfile = true; clickname = false;" class="btn">File</button>
+      <button (click)="checkSchedule(); cschedule = true; clickname = false;" class="btn">Schedule</button>
+      <button (click)="clickname=false;" class="btn">Back</button>
     </div>
   </div>
   <div *ngIf="cprofile" class="detail group" id="profile">
     <h5>{{check.Login.provider}} (으)로 가입했습니다.</h5>
     <h5>이메일 : {{check.Login.email}}</h5>
-    <h5>닉네임 : {{check.Login.nickname}}</h5>프로젝트 :
+    <h5>닉네임 : {{check.Login.nickname}}</h5>
+    <h5>학교 : {{check.Login.school}}</h5>
+    <h5>학번 : {{check.Login.studentid}}</h5>프로젝트 :
     <li *ngFor="let group of groups; let i = index" (click)="clickedGroup(i)" style="text-align: center; cursor: pointer;">
       {{group.id}}
     </li>
-    <button (click)="cprofile = false; clickname=true;" style="position: relative; left: 70%;">Back</button>
+    <button (click)="cprofile = false; clickname=true;" style="position: relative; left: 70%;" class="btn">Back</button>
   </div>
   <div *ngIf="cfile" class="detail file" id="file">
     <li *ngFor="let file of Filelist; let i = index" >
       <a href="http://localhost:3000/download/{{FileAccess[i].substring(2, FileAccess[i].length)}}"  target="_blank" >{{file}}</a>
     </li>
-    <button (click)="cfile = false; clickname=true;" style="position: relative; left: 70%;">Back</button>
+    <button (click)="cfile = false; clickname=true;" style="position: relative; left: 70%;" class="btn">Back</button>
   </div>
   <div *ngIf="cschedule" class="detail schedule" id="schedule">
     스케쥴
-    <button (click)="cschedule = false; clickname=true;" style="position: relative; left: 70%;">Back</button>
+    <button (click)="cschedule = false; clickname=true;" style="position: relative; left: 70%;" class="btn">Back</button>
   </div>
 </body>

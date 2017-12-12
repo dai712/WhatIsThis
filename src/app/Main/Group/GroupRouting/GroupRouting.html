@@ -11,5 +11,10 @@
     </div>
   </nav>
 </div>
+<div class="groupdetail">
+  <b *ngIf="loaded === false"> loading...</b>
+  <h3>Member List</h3>
+  <li *ngFor="let mems of members" >{{mems.Login.nickname}}</li>
+</div>
 </body>
 

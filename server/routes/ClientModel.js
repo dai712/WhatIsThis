@@ -9,6 +9,8 @@ const ClientSchema = new mongoose.Schema({
     id: String,
     nickname: String,
     provider: String,
+    school: String,
+    studentid: String,
   },
   Files: [{
     path: String,

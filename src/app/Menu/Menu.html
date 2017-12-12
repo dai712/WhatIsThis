@@ -1,23 +1,25 @@
 <link rel="stylesheet" type="text/css" href="/font-awesome.min.css" />
 <link href="https://fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet">
 <body>
-<div class = "menudiv inner">
-  <div class="menudiv" (click)="routing('/private/'); clickroute = true;">
-    <h5>Private</h5>
-  </div>
-  <div class="menudiv" (click)="routing('/group/'); clickroute = true;">
-    <h5>Group</h5>
-  </div>
-  <div class="menudiv" (click)="routing('/search/'); clickroute = true;">
-    <h5>Search Users</h5>
-  </div>
+<div id='cssmenu'>
+  <ul>
+    <li [ngClass]="{
+    'active' : clickedmenu === 1}"><a (click)="routing('/private/'); clickroute = true; clickedmenu = 1;">Private</a></li>
+    <li [ngClass]="{
+    'active' : clickedmenu === 2}"><a (click)="routing('/group/'); clickroute = true; clickedmenu = 2;">Group</a></li>
+    <li [ngClass]="{
+    'active' : clickedmenu === 3}"><a (click)="routing('/search/'); clickroute = true; clickedmenu = 3;">Search Users</a></li>
+  </ul>
 </div>
 <div class="main">
   <router-outlet></router-outlet>
   <div class="welcome" *ngIf="clickroute === false">
-    <h2>AJou Team Project</h2>
+    <h1>AJou Team Project</h1>
+    <img src="../../assets/images/back.jpg" />
+    <h2>The site for Team-Work</h2>
   </div>
 </div>
+
 
 </body>
 
