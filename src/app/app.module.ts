@@ -72,7 +72,6 @@ import { FroalaEditorModule, FroalaViewModule } from 'angular-froala-wysiwyg';
     ]),
     FroalaViewModule.forRoot(),
     FroalaEditorModule.forRoot(),
-  SheetModule,
   ],
   providers: [
     HttpService,

@@ -1,15 +1,14 @@
 import {Component, Input, OnDestroy, OnInit} from '@angular/core';
 import * as io from 'socket.io-client';
 import {ActivatedRoute, Router} from '@angular/router';
-import {IShContextMenuItem} from "ng2-right-click-menu";
 import {HttpService} from "../../../../HttpService";
 import {NgForm} from "@angular/forms";
 
 
 @Component({
   selector: 'app-docs',
-  templateUrl: './docs.html',
-  styleUrls: ['./docs.css'],
+  templateUrl: './Docs.html',
+  styleUrls: ['./Docs.css'],
 })
 
 export class DocsComponent implements OnInit {
