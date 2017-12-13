@@ -1,5 +1,4 @@
 import {Component, Injectable, OnInit} from '@angular/core';
-import {DataTableModule, SharedModule} from "primeng/primeng";
 import {NgForm} from "@angular/forms";
 import {Table} from "./Table";
 import {ActivatedRoute, Router} from "@angular/router";
